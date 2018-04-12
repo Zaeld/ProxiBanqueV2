@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="fr">
 
@@ -26,20 +27,40 @@
 	<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#myNavbar">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
 			<a class="navbar-left"><img src="img/ProxiBanqueSI-Logo.png"
 				class="img-fluid" alt=PBSI-logo></a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a class="btn btn-danger btn-lg" href="index.html"
+					role="button" target="quitter">Quitter</a></li>
+			</ul>
 		</div>
 	</div>
 	</nav>
 
 	<div class="container-fluid text-center">
-		<div class="jumbotron">
-			<h2 target="danger">Echec d'authentification du Conseiller. Essayer à nouveau.</h2>
-		</div>
+		<div class="row content">
+			<div class="col-sm-1 sidenav"></div>
+			<div class="col-sm-10 text-left">
+				<div class="jumbotron">
+					<h2 target="danger">Une erreur est survenue lors de la modification du client. Essayer à nouveau.</h2>
+					<div class="text-center">
+						<a class="btn btn-default btn-lg"
+							href="modificaionClient.jsp"
+							role="button">Retour</a>
+					</div>
+				</div>
 
-		<div class="text-center">
-		<a class="btn btn-default btn-lg" href="index.html" role="button">Retour</a>
+			</div>
+			<div class="col-sm-1 sidenav"></div>
 		</div>
+	</div>
 
 	</div>
 
@@ -51,5 +72,4 @@
 	</footer>
 
 </body>
-
 </html>

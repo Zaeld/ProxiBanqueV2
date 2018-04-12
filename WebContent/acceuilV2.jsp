@@ -26,6 +26,7 @@
 
 <body>
 
+	<!-- Création de la barre de navigation noir (inverse) avec l'option collapse pour la création d'un boutton lors du passage sur petits écrans -->
 	<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -56,8 +57,8 @@
 			<div class="col-sm-10 text-left">
 				<h4 class="text-center">
 					Bienvenue dans votre espace ProxiBanqueSI
-					<c:out value="${user.nom}" />
-					<c:out value="${user.prenom}" />
+					<c:out value="${conseiller.nom}" />
+					<c:out value="${conseiller.prenom}" />
 				</h4>
 				<hr>
 				<h2>Liste des clients gérés :</h2>
@@ -67,11 +68,9 @@
 						<tr>
 							<td><h4>Nom</h4></td>
 							<td><h4>Prénom</h4></td>
-
+							<td><h4>e-mail</h4></td>
 							<td><h4>Téléphone</h4></td>
-
-							<td></td>
-
+							<td><h4>Adresse</h4></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -79,12 +78,18 @@
 							<tr>
 								<td><c:out value="${client.nom}" /></td>
 								<td><c:out value="${client.prenom}" /></td>
+								<td><c:out value="${client.email}" /></td>
 								<td><c:out value="${client.telephone}" /></td>
-								<td><a class="btn btn-success"
-									href="ServletAcceuilRedirection?idClient=${client.getIdClient()}&direction=gerer"
-									role="button">Gérer le client</a> <a class="btn btn-warning"
+								<td><c:out value="${client.adresse}+${client.codePostal}+${client.ville}" /></td>
+								<td><a class="btn btn-info"
+									href="ServletAcceuilRedirection?idClient=${client.getIdClient()}&direction=listeCompte"
+									role="button">Listes des comptes du client</a>
+									<a class="btn btn-success"
+									href="ServletAcceuilRedirection?idClient=${client.getIdClient()}&direction=virement"
+									role="button">Virement Compte à Compte</a>
+									 <a class="btn btn-warning"
 									href="ServletAcceuilRedirection?idClient=${client.getIdClient()}&direction=modifier"
-									role="button">Modifier</a> <a class="btn btn-danger"
+									role="button">Modifier les informations client</a> <a class="btn btn-danger"
 									href="ServletAcceuilRedirection?idClient=${client.getIdClient()}&direction=supprimer"
 									role="button">Supprimer</a></td>
 							</tr>

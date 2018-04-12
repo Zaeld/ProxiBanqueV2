@@ -49,7 +49,7 @@
 			<div class="col-sm-1 sidenav"></div>
 			<div class="col-sm-10 text-left">
 				<div class="jumbotron">
-					<h2 target="danger">Une erreur est survenue lors de la création du client.</h2>
+					<h2 target="danger">Une erreur est survenue lors de la création du client. Essayer à nouveau.</h2>
 					<div class="text-center">
 						<a class="btn btn-default btn-lg"
 							href="creerClient.jsp"

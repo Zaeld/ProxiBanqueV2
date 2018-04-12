@@ -42,38 +42,34 @@ public class ServletLogin extends HttpServlet {
 		//recuperation des login et mot de passe
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("mdp");
-
-		/* TODO verification du login et mot de passe
-		 * LoginService service = new LoginService();
-		 * int resultat = service.verifLogin(login, pwd); Conseiller
-		 * 
-		 * 0=mauvais --> renvoie sur index.jsp
-		 * 1=conseiller --> renvoie sur acceuilV2.jsp
-		 * 2=gerant --> renvoie sur page propre au gerant
-		 */
-
-		//creation de la reponse et du user en attendant que le service soit gere
-		boolean reponse = true;
-		Conseiller user = new Conseiller("Blabla", "Bliblou", 1);
 		
-		if (reponse == true) {
+		//Création de l'utilisateur et vérification de son existance
+		Login user = new Login(login, pwd);
+		LoginService service = new LoginService();
+		
+		//TODO retirer infos en dur
+		//Conseiller conseiller = service.VerifLogin(user);
+		Conseiller conseiller = new Conseiller("Blabla", "Bliblou");
+				
+		RequestDispatcher dispatcher;
+		
+		if (conseiller != null) {//Si e conseiller existe on créé une session et on renvoie sur l'acceuil avec la liste de ses clients
 			//Creation d'une session prenant en compte le user
 			HttpSession maSession = request.getSession();
-			maSession.setAttribute("user", user);
+			maSession.setAttribute("conseiller", conseiller);
 			//Creation de la liste de client gere a renvoyer
 			ClientService monService = new ClientService();
 			List<Client> listeClient = new ArrayList<Client>();
-			listeClient = monService.getAllClient();//devra prendre en compte que si c'est le gerant il n'a pas de clients
+			//TODO remettre juste les clients du conseiller
+			//listeClient = monService.getAllClientConseiller(conseiller);
+			listeClient = monService.getAllClient();
 			maSession.setAttribute("listeClient", listeClient);
-			//renvoie a l'acceuil
-			RequestDispatcher dispatcher = request.getRequestDispatcher("acceuilV2.jsp");
+			
+			dispatcher = request.getRequestDispatcher("acceuilV2.jsp");
 			dispatcher.forward(request, response);
-		} else {
-			//renvoie sur l'index.jsp avec message error
-			RequestDispatcher dispatcher = request.getRequestDispatcher("mauvaisLogin.jsp");
+		}//sinon on renvoie sur une page d'erreur
+			dispatcher = request.getRequestDispatcher("mauvaisLogin.jsp");
 			dispatcher.forward(request, response);
-		}
-
 	}
 
 	/**

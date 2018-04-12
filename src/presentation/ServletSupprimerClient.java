@@ -34,45 +34,33 @@ public class ServletSupprimerClient extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		//récupération de la réponse et transformation en boolean
 		String texte = request.getParameter("reponse");
 		boolean reponse = false;
 		if (texte.equals("oui")) {
 			reponse = true;
 		}
-		System.out.println(texte);
-		System.out.println(reponse);
-		if (reponse == true) {
+		
+		RequestDispatcher dispatcher;
+		if (reponse == true) {//si réponse oui on supprime le client
 			String a = request.getParameter("idClient");
 			int idClient = Integer.parseInt(a);
 			Client monClient = new Client();
 			monClient.setIdClient(idClient);
 			ClientService service = new ClientService();
 			boolean retour = service.deleteClient(monClient);
-			if (retour == true) {
-				ClientService monService = new ClientService();
-				List<Client> listeClient = new ArrayList<Client>();
-				listeClient = monService.getAllClient();
-				request.setAttribute("listeClient", listeClient);
-				RequestDispatcher dispatcher;
-				dispatcher = request.getRequestDispatcher("acceuilV2.jsp");
+			if (retour == true) {//Si le client est supprimé correctement on renvoie sur lapage de réussite
+				dispatcher = request.getRequestDispatcher("operationReussie.jsp");
 				dispatcher.forward(request, response);
-			} else {
-				// TODO devra renvoyer vers page d'erreur
-				RequestDispatcher dispatcher;
-				dispatcher = request.getRequestDispatcher("suppressionClient.jsp");
+			} else {//Sinon on renvoie vers une page d'erreur
+				dispatcher = request.getRequestDispatcher("suppressionClientErreur.jsp");
 				dispatcher.forward(request, response);
 			}
-		} else {
-			ClientService monService = new ClientService();
-			List<Client> listeClient = new ArrayList<Client>();
-			listeClient = monService.getAllClient();
-			request.setAttribute("listeClient", listeClient);
-			RequestDispatcher dispatcher;
+		} else {//si la réponse est non on renvoie vers l'acceuil
 			dispatcher = request.getRequestDispatcher("acceuilV2.jsp");
 			dispatcher.forward(request, response);
 		}
-
 	}
 
 	/**

@@ -41,14 +41,23 @@ public class ServletCreerClient extends HttpServlet {
 		String prenom = request.getParameter("prenom");
 		String sitprof = request.getParameter("situationProfessionelle");
 		String numtel = request.getParameter("numeroTelephone");
+		String email = request.getParameter("email");
 		String adresse = request.getParameter("adresse");
 		String cp = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
+		String id = request.getParameter("idConseiller");
+		
+		int idConseiller;
+		if (id.equals(null)) {
+			idConseiller = 0;
+		}else {
+			idConseiller = Integer.parseInt(id);
+		}
+		
+		//creation d'un client avec les infos recuperees
+		Client monClient = new Client(nom, prenom, adresse, cp, ville, numtel, email, sitprof, idConseiller);
 
-		// TODO creation d'un client avec les infos recuperees
-		Client monClient = new Client(nom, prenom, adresse, cp, ville, numtel, sitprof);
-
-		// soumetter les parametre de la requï¿½te a la couche service et recuperation du user
+		// les parametres de la requete sont soumis a la couche service et recuperation de la réponse
 		ClientService service = new ClientService();
 		boolean reponse = service.createClient(monClient);
 
@@ -56,19 +65,12 @@ public class ServletCreerClient extends HttpServlet {
 		RequestDispatcher dispatcher;
 
 		if (reponse == true) {
-			//TODO Ajouter une alerte de reussite
-			ClientService monService = new ClientService();
-			List<Client> listeClient = new ArrayList<Client>();
-			listeClient = monService.getAllClient();
-			request.setAttribute("listeClient", listeClient);
-			dispatcher = request.getRequestDispatcher("creationClientReussie.jsp");
+			dispatcher = request.getRequestDispatcher("operationReussie.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			//TODO Ajouter une alerte de probleme
 			dispatcher = request.getRequestDispatcher("creationClientErreur.jsp");
 			dispatcher.forward(request, response);
-		}//TODO rajouter cas des 10 clients deja existant ?
-
+		}
 	}
 
 	/**

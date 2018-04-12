@@ -35,6 +35,9 @@
 				class="img-fluid" alt=PBSI-logo></a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav">
+				<li><a href="acceuilV2.jsp">Retour</a></li>
+			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a class="btn btn-danger btn-lg" href="index.html"
 					role="button" target="quitter">Quitter</a></li>
@@ -54,8 +57,8 @@
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label for="inputName">Nom</label> <input type="text"
-								class="form-control" id="inputNom"
-								value="${client.getNom()}" name="nom">
+								class="form-control" id="inputNom" value="${client.getNom()}"
+								name="nom">
 						</div>
 						<div class="form-group col-md-6">
 							<label for="inputPrenom">Prénom</label> <input type="text"
@@ -64,15 +67,21 @@
 						</div>
 					</div>
 					<div class="form-row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-4">
 							<label for="inputCivil">Situation Professionnelle</label> <select
 								id="inputStiProf" class="form-control"
-								name="situationProfessionelle" value="${client.getSituationProfessionnel()}">
+								name="situationProfessionelle"
+								value="${client.getSituationProfessionnel()}">
 								<option selected>particulier</option>
 								<option>entreprise</option>
 							</select>
 						</div>
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-4">
+							<label for="inputMail">Email</label> <input type="email"
+								class="form-control" id="inputMail" value="${client.getEmail()}"
+								name="email">
+						</div>
+						<div class="form-group col-md-4">
 							<label for="inputPhone">Numéro de téléphone</label> <input
 								type="number" class="form-control" id="inputPhone"
 								value="${client.getTelephone()}" name="numeroTelephone">
@@ -87,7 +96,7 @@
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-4">
-							<label for="inputCp">Code Postale</label> <input type="text"
+							<label for="inputCp">Code Postale</label> <input type="number"
 								class="form-control" id="inputCp"
 								value="${client.getCodePostal()}" name="codePostal">
 						</div>
@@ -99,8 +108,7 @@
 					</div>
 					<div class="form-row text-center">
 						<input type="submit" value="Enregistrer"
-							class="btn btn-success btn-lg"> <input type="submit"
-							value="Retour" class="btn btn-danger btn-lg">
+							class="btn btn-success btn-lg">
 					</div>
 				</form>
 			</div>

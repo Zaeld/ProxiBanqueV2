@@ -36,7 +36,7 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li><a href="ServletRetourAcceuil">Acceuil</a></li>
+				<li><a href="acceuilV2.jsp">Acceuil</a></li>
 				<li class="active"><a href="#">Créer un client</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -54,7 +54,7 @@
 				<div class="jumbotron">
 					<h2 class="text-center">Création du client</h2>
 				</div>
-				<form method=post " action="ServletCreerClient">
+				<form method=post " action="ServletCreerClient?idConseiller=${conseiller.getIdConseiller}">
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label for="inputName">Nom</label> <input type="text"
@@ -67,7 +67,7 @@
 						</div>
 					</div>
 					<div class="form-row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-4">
 							<div class="form-check">
 								<label for="situationProfessionnel">Situation
 									Professionnelle : </label>
@@ -81,7 +81,12 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-4">
+							<label for="inputMail">Email</label> <input
+								type="email" class="form-control" id="inputMail"
+								placeholder="Email" name="email">
+						</div>
+						<div class="form-group col-md-4">
 							<label for="inputPhone">Numéro de téléphone</label> <input
 								type="number" class="form-control" id="inputPhone"
 								placeholder="Numéro de télpéhone" name="numeroTelephone">
@@ -96,7 +101,7 @@
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-4">
-							<label for="inputCp">Code Postale</label> <input type="text"
+							<label for="inputCp">Code Postale</label> <input type="number"
 								class="form-control" id="inputCp" name="codePostal">
 						</div>
 						<div class="form-group col-md-8">

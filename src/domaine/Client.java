@@ -8,6 +8,7 @@ private String adresse;
 private String codePostal;
 private String ville;
 private String telephone;
+private String email;
 private String situationProfessionnel;
 private String situationFinanciere;
 private double soldeTotal;
@@ -18,9 +19,32 @@ public Client() {
 
 }
 
+public Client(String nom, String prenom, String adresse, String codePostal, String ville, String telephone,
+		String email, String situationProfessionnel) {
+	super();
+	this.nom = nom;
+	this.prenom = prenom;
+	this.adresse = adresse;
+	this.codePostal = codePostal;
+	this.ville = ville;
+	this.telephone = telephone;
+	this.email = email;
+	this.situationProfessionnel = situationProfessionnel;
+}
 
-
-
+public Client(String nom, String prenom, String adresse, String codePostal, String ville, String telephone,
+		String email, String situationProfessionnel, int idConseiller) {
+	super();
+	this.nom = nom;
+	this.prenom = prenom;
+	this.adresse = adresse;
+	this.codePostal = codePostal;
+	this.ville = ville;
+	this.telephone = telephone;
+	this.email = email;
+	this.situationProfessionnel = situationProfessionnel;
+	this.idConseiller = idConseiller;
+}
 
 
 public double getSoldeTotal() {

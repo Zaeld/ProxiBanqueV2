@@ -40,9 +40,10 @@ public class ServletAcceuilRedirection extends HttpServlet {
 		request.setAttribute("client", monClient);
 		RequestDispatcher dispatcher;
 		String direction = (String) request.getParameter("direction");
-		System.out.println(direction);
-		if (direction.equals("gerer")) {
+		if (direction.equals("listeCompte")) {
 			dispatcher = request.getRequestDispatcher("client.jsp");
+		}else if (direction.equals("virement")) {
+			dispatcher = request.getRequestDispatcher("virement.jsp");
 		}else if (direction.equals("modifier")) {
 			dispatcher = request.getRequestDispatcher("modificationClient.jsp");
 		}else {
