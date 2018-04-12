@@ -1,4 +1,4 @@
-package domaineCompte;
+package domaine;
 
 import domaine.Client;
 
@@ -7,40 +7,38 @@ import domaine.Client;
 
 
 
-public abstract class Compte {
+public abstract class CompteBancaire {
 
 	// propriétés
-	private int numeroCompte;
+	int idCompte;
+	private int numCompte;
 	private double solde;
 	private String dateOuverture;
-	private Client client;
 	int idClient;
-	int idCompte;
 
 	
 	// constructors
-	public Compte() {
-		this.numeroCompte = (int) (Math.random() * 10000);
+	public CompteBancaire() {
+		this.numCompte = (int) (Math.random() * 10000);
 		this.solde = 12;
 		this.dateOuverture = "lundi";
-		this.client = new Client();
+		this.idCompte=1;
 	}
 
-	public Compte(String date, Client client) {
+	public CompteBancaire(String date, Client client) {
 		this.solde = 0;
 		this.dateOuverture = date;
-		this.client = client;
-		this.numeroCompte = (int) (Math.random() * 10000);
+		this.numCompte = (int) (Math.random() * 10000);
 
 	}
 
 	// getters et setters
 	public int getNumeroCompte() {
-		return numeroCompte;
+		return numCompte;
 	}
 
 	public void setNumeroCompte(int numeroCompte) {
-		this.numeroCompte = numeroCompte;
+		this.numCompte = numeroCompte;
 	}
 
 	public double getSolde() {
@@ -57,14 +55,6 @@ public abstract class Compte {
 
 	public void setDateOuverture(String dateOuverture) {
 		this.dateOuverture = dateOuverture;
-	}
-
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
 	}
 	public int getIdClient() {
 		return idClient;
@@ -84,7 +74,7 @@ public abstract class Compte {
 
 	// toString
 	public String toString(int numeroCompte) {
-		return "Le compte de numéro " + this.numeroCompte + " a pour solde " + this.solde + " euros, a été créé le "
+		return "Le compte de numéro " + this.numCompte + " a pour solde " + this.solde + " euros, a été créé le "
 				+ this.dateOuverture;
 	}
 }

@@ -1,21 +1,23 @@
 package dAO;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Connexion {
+	// Classe appelant le driver et permettant la connexion avec la base de donnée.
+	/**
+	 * @return
+	 */
 	public static Connection connexion() {
 		Connection maConnection = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			maConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/proxybanque", "root", "");
+			maConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/proxibanque", "root", "");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return maConnection;

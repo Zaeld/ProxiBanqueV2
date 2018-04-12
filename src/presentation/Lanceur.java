@@ -2,23 +2,44 @@ package presentation;
 
 import java.util.Scanner;
 
+
 import Service.ClientService;
+import Service.LoginService;
 import dAO.ClientDAO;
 import dAO.CompteCourantDAO;
+import dAO.CompteEpargneDAO;
+import dAO.LoginDAO;
 import domaine.Client;
-import domaineCompte.CCourant;
+import domaine.Epargne;
+import domaine.Login;
+
 
 public class Lanceur {
 	public static void main(String[] args) {
 		ClientService serviceClient = new ClientService();
-		ClientDAO dao = new ClientDAO();
 		Client client = new Client();
-		CCourant compte = new CCourant();
-		CompteCourantDAO compteDAO = new CompteCourantDAO();
-//	dao.getClient(7, client);
+		Epargne compte = new Epargne();
+
+		LoginService loginServiceDAO = new LoginService();
+		Login login = new Login ("championDu69", "693512");
 		
-		compteDAO.creerCompte(client, compte);
 		
+		//		loginServiceDAO.Connexion(employeDAO, loginDAO, login);
+
+
+//		compte.setIdCompte(23);
+//dao.creerClient(client);
+//dao.getClient(client);
+//compte.setSolde(10500);
+//
+//		dao.updateClient(client);
+//	
+//dao.deleteClient(client);
+//	System.out.println(dao.getAll());
+
+
+//		System.out.println(compteDAO.getCompte(compte));
+//		
 //		int selection;
 //		Scanner a = new Scanner(System.in);
 //		Scanner b = new Scanner(System.in);

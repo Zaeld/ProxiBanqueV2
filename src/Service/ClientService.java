@@ -2,54 +2,43 @@ package Service;
 
 import java.util.List;
 
+
+
 import dAO.ClientDAO;
 import domaine.Client;
+import domaine.Courant;
+import domaine.Epargne;
+
 
 public class ClientService {
-	public String creerClient(ClientDAO dao, Client client) {
-		if (dao.creerClient(client))
-			return "Le client a été créé avec succès";
-		else
-			return "Le client ne peut pas être créé";
+	ClientDAO dao = new ClientDAO();
+
+	public boolean createClient(Client client) {
+		return dao.createClient(client);
+	
 	}
 
-	public Client getClient(ClientDAO dao, int idClient, Client client) {
-		System.out.println("Récupération du client dans la base de donnée");
-		return dao.getClient(idClient, client);
+	public Client getClient(Client client) {
+		return dao.getClient(client);
 	}
 
-	public Client updateClient(ClientDAO dao, Client client) {
-		System.out.println("Modification des données du client");
-
+	public Client updateClient(Client client) {
 		return dao.updateClient(client);
 	}
 
-	public String deleteClient(ClientDAO dao, Client client) {
-		if (dao.deleteClient(client))
-			return "Le client a été supprimé avec succès";
-		else
-			return "Le client ne peut pas être supprimé";
+	public boolean deleteClient(Client client) {
+		return dao.deleteClient(client);
 	}
 
-	public void getAll(ClientDAO dao) {
-		List<Client> list = dao.getAll();
-		for (Client client : list) {
-			System.out.println(client);
+	public List<Client> getAllClient() {
+		return dao.getAllClient();
 		}
-	}
+	public Courant getCompteCourant(Client client) {
+		return dao.getCompteCourant(client);
+		}
+	public Epargne getCompteEpargne(Client client) {
+		return dao.getCompteEpargne(client);
+		}
 }
 
-// domaine.Client client = new Client();
-//
-// Scanner c = new Scanner(System.in);
-// Scanner i = new Scanner(System.in);
-//
-// System.out.println("Veuillez rentrer le nom du client :");
-// client.setNom(c.nextLine());
-// System.out.println("Veuillez rentrer le prenom du client :");
-// client.setPrenom(c.nextLine());
-// System.out.println("Veuillez rentrer l'idConseiller du client :");
-// client.setIdConseiller(i.nextInt());
-// System.out.println("Veuillez rentrer l'age du client :");
-// client.setAge(i.nextInt());
-//
+

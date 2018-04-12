@@ -1,50 +1,90 @@
 package dAO;
+
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import domaine.Client;
-import domaineCompte.CCourant;
-import domaineCompte.CEpargne;
-import domaineCompte.Compte;
+import domaine.Courant;
+import domaine.Epargne;
+
 
 public class ClientDAO {
-	
 
-	public boolean creerClient(Client client) {
+	// ClientDAO est la classe dans la couche DAO qui permet d'accéder aux
+	// informations de la table 'Client'de la base de donnée spécifiée dans la
+	// classe Connexion.
+	// Un client correspond à une ligne de la table.
+	// Cette classe permet de créer, lire les informations, modifier, supprimer un
+	// client, de récupérer ses comptes et de récupérer la liste de la totalité des
+	// clients.
+
+	// Méthode permettant d'insérer un client en base de donnée en prenant un objet
+	// de type client en entrée et retournant un boolean de valeur true si
+	// l'opération a été un succès.
+	/**
+	 * @param client
+	 * @return
+	 */
+	public boolean createClient(Client client) {
 		int i = 0;
 		boolean b = false;
 		try {
-		Statement stmt = Connexion.connexion().createStatement();
-		String s = "INSERT INTO `client`(`idClient`, `nom`, `prenom`, `idConseiller`, `age`) VALUES ("
-				+ client.getIdClient() + ", '" + client.getNom() + "', '" + client.getPrenom() + "', '"
-				+ client.getIdConseiller() + "', " + client.getAge() + ")";
-		
+			Statement stmt = Connexion.connexion().createStatement(); // Création d'un objet de type Statement
+
+			// Affectation à la chaine de caractère s de la requète SQL
+			String s = "INSERT INTO `client`(`adresse`, `nom`, `prenom`, `codePostal`, `ville`, `situationFinanciere`, `situationProfessionnel`, `idConseiller`, `telephone`, `soldeTotal`) VALUES ('"
+					+ client.getAdresse() + "', '" + client.getNom() + "', '" + client.getPrenom() + "', '"
+					+ client.getCodePostal() + "', '" + client.getVille() + "', '" + client.getSituationFinanciere()
+					+ "', '" + client.getSituationProfessionnel() + "', " + client.getidConseiller() + ", '"
+					+ client.getTelephone() + "', " + client.getSoldeTotal() + ")";
+
+			// exécution de la requète
 			i = stmt.executeUpdate(s);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		// Si l'opération est un succès, i est différend de 0 et la méthode retourne
+		// true
 		if (i != 0)
 			b = true;
 		return b;
 
 	}
 
-	public Client getClient(int idClient, Client client) {
+	// Méthode permettant de récupérer les informations d'un client de la table
+	// 'client' en prenant comme paramètre d'entrée un objet client présentant comme
+	// attribut l'idClient du client à récupérer. La méthode retourne un objet
+	// client présentants les informations récupérées.
+	/**
+	 * @param client
+	 * @return
+	 */
+	public Client getClient(Client client) {
 		try {
-			Statement stmt = Connexion.connexion().createStatement();
-			String s = "Select * from Client where idClient = " + idClient;
-			// Etape 4 : exécution de la requete
+			Statement stmt = Connexion.connexion().createStatement(); // Création d'un objet de type Statement
+
+			// Affectation à la chaine de caractère s de la requète SQL
+			String s = "Select * from Client where idClient = " + client.getIdClient();
+
+			// Exécution de la requète
 			ResultSet rs = stmt.executeQuery(s);
-			// Etape 5 : lecture
+
+			// Lecture des résultats de la requète
 			rs.next();
-			client.setIdClient(rs.getInt("idClient"));
+			client.setAdresse(rs.getString("adresse"));
 			client.setNom(rs.getString("nom"));
 			client.setPrenom(rs.getString("prenom"));
-			client.setIdConseiller(rs.getInt("idConseiller"));
-			client.setAge(rs.getInt("age"));
+			client.setCodePostal(rs.getString("codePostal"));
+			client.setVille(rs.getString("ville"));
+			client.setSituationFinanciere(rs.getString("situationFinanciere"));
+			client.setSituationProfessionnel(rs.getString("situationProfessionnel"));
+			client.setidConseiller(rs.getInt("idConseiller"));
+			client.setTelephone(rs.getString("telephone"));
+			client.setSoldeTotal(rs.getInt("soldeTotal"));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -53,22 +93,44 @@ public class ClientDAO {
 
 	}
 
+	// Méthode permettant de modifier les informations d'un client de la table
+	// 'client' en prenant comme paramètre d'entrée un objet client présentant les
+	// nouvelles valeurs d'attributs . La méthode retourne l'objet client récupéré
+	// de la base de donnée avec les nouvelles valeurs d'attribut.
+	/**
+	 * @param client
+	 * @return
+	 */
 	public Client updateClient(Client client) {
 		try {
-			Statement stmt = Connexion.connexion().createStatement();
-			String s = "UPDATE client set nom = '" + client.getNom() + "', prenom = '" + client.getPrenom()
-					+ "', idConseiller = " + client.getIdConseiller() + ", age = " + client.getAge()
-					+ " where idclient = " + client.getIdClient();
+			Statement stmt = Connexion.connexion().createStatement(); // Création d'un objet de type Statement
+
+			// Affectation à la chaine de caractère s de la requète SQL
+			String s = "UPDATE client set adresse = '" + client.getAdresse() + "', nom = '" + client.getNom()
+					+ "', prenom = '" + client.getPrenom() + "', CodePostal = '" + client.getCodePostal()
+					+ "', ville = '" + client.getVille() + "', situationFinanciere = '"
+					+ client.getSituationFinanciere() + "', situationProfessionnel = '"
+					+ client.getSituationProfessionnel() + "', idConseiller = " + client.getidConseiller() + ", telephone = '"
+					+ client.getTelephone() + "', soldeTotal = " + client.getSoldeTotal() + ", where idClient = "
+					+ client.getIdClient();
+			// exécution de la requète
 			stmt.executeUpdate(s);
-			s = "Select * from Client where idClient = " + client.getIdClient();
+
+			// Affectation à la chaine de caractère s de la requète SQL
+			s = "Select * from client where idClient = " + client.getIdClient();
 			ResultSet rs = stmt.executeQuery(s);
-			// Etape 5 : lecture
-			rs.next();
-			client.setIdClient(rs.getInt("idClient"));
+			// Lecture des résultats de la requète
+			rs.first();
+			client.setAdresse(rs.getString("adresse"));
 			client.setNom(rs.getString("nom"));
 			client.setPrenom(rs.getString("prenom"));
-			client.setIdConseiller(rs.getInt("idConseiller"));
-			client.setAge(rs.getInt("age"));
+			client.setCodePostal(rs.getString("codePostal"));
+			client.setVille(rs.getString("ville"));
+			client.setSituationFinanciere(rs.getString("situationFinanciere"));
+			client.setSituationProfessionnel(rs.getString("situationProfessionnel"));
+			client.setidConseiller(rs.getInt("idConseiller"));
+			client.setTelephone(rs.getString("telephone"));
+			client.setSoldeTotal(rs.getInt("soldeTotal"));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -76,13 +138,38 @@ public class ClientDAO {
 		return client;
 	}
 
+	// Méthode permettant de suppimer l'entrée de la table 'client' présentant le
+	// même idClient que l'objet client en paramètre d'entrée de méthode et
+	// retournant un boolean de valeur true si
+	// l'opération a été un succès.
+	/**
+	 * @param client
+	 * @return
+	 */
 	public boolean deleteClient(Client client) {
+
 		int i;
 		boolean b = false;
 		try {
-			Statement stmt = Connexion.connexion().createStatement();
-			String s = "DELETE from client where idClient = " + client.getIdClient();
+
+			Statement stmt = Connexion.connexion().createStatement(); // Création d'un objet de type Statement
+
+			// Affectation à la chaine de caractère s de la requète SQL, il est nécessaire
+			// de supprimer les comptes du client avant de le supprimer car la table
+			// 'compte' est dépendante de la table 'client'
+
+			String s = "DELETE from compte where idClient = " + client.getIdClient();
+
+			// exécution de la requète
 			i = stmt.executeUpdate(s);
+
+			// Affectation à la chaine de caractère s de la requète SQL
+			s = "DELETE from client where idClient = " + client.getIdClient();
+
+			// exécution de la requète
+			i = stmt.executeUpdate(s);
+			// Si l'opération est un succès, i est différend de 0 et la méthode retourne
+			// true
 			if (i != 0)
 				b = true;
 
@@ -92,22 +179,36 @@ public class ClientDAO {
 		return b;
 	}
 
-	public List<Client> getAll() {
+	// Méthode retournant une liste de toute les entrées de la table 'client' de la
+	// base de donnée.
+	/**
+	 * @return
+	 */
+	public List<Client> getAllClient() {
 		List<Client> listClient = new ArrayList<Client>();
 
 		try {
-			Statement stmt = Connexion.connexion().createStatement();
+			Statement stmt = Connexion.connexion().createStatement(); // Création d'un objet de type Statement
+
+			// Affectation à la chaine de caractère s de la requète SQL
 			String s = "Select * from Client";
-			// Etape 4 : exécution de la requete
+
+			// exécution de la requète
 			ResultSet rs = stmt.executeQuery(s);
-			// Etape 5 : lecture
+			// Lecture des résultats de la requète et insertion dans la liste pour chaque
+			// boucle
 			while (rs.next()) {
 				Client client = new Client();
-				client.setIdClient(rs.getInt("idClient"));
+				client.setAdresse(rs.getString("adresse"));
 				client.setNom(rs.getString("nom"));
 				client.setPrenom(rs.getString("prenom"));
-				client.setIdConseiller(rs.getInt("idConseiller"));
-				client.setAge(rs.getInt("age"));
+				client.setCodePostal(rs.getString("codePostal"));
+				client.setVille(rs.getString("ville"));
+				client.setSituationFinanciere(rs.getString("situationFinanciere"));
+				client.setSituationProfessionnel(rs.getString("situationProfessionnel"));
+				client.setidConseiller(rs.getInt("idConseiller"));
+				client.setTelephone(rs.getString("telephone"));
+				client.setSoldeTotal(rs.getInt("soldeTotal"));
 				listClient.add(client);
 			}
 		} catch (SQLException e) {
@@ -115,12 +216,70 @@ public class ClientDAO {
 		}
 		return listClient;
 	}
-	public List<CCourant> getAllCompte() {
-		List<CCourant> listCCourant = new ArrayList<CCourant>();
-		List<CEpargne> listCEpargne = new ArrayList<CEpargne>();
-		List listCompte = new ArrayList<Compte>();
-		listCompte.addAll(listCCourant);
-		listCompte.addAll(listCEpargne);
-		return listCompte;
+
+
+	// Méthode retournant le compte courant associé au client en paramètre d'entrée
+	// de méthode.
+	/**
+	 * @param client
+	 * @param compte
+	 * @return
+	 */
+	public Courant getCompteCourant(Client client) {
+		Courant compte = new Courant();
+		try {
+			Statement stmt = Connexion.connexion().createStatement(); // Création d'un objet de type Statement
+
+			// Affectation à la chaine de caractère s de la requète SQL
+			String s = "Select * from compte inner Join client on compte.idClient = client.idClient where typeDeCompte = 'courant' && idClient = "
+					+ client.getIdClient();
+
+			// exécution de la requète
+			ResultSet rs = stmt.executeQuery(s);
+			// Lecture des résultats de la requète
+			rs.next();
+			compte.setIdCompte(rs.getInt("IdCompte"));
+			compte.setNumeroCompte(rs.getInt("numeroCompte"));
+			compte.setdecouvertAutorise(rs.getDouble("decouvertAutorise"));
+			compte.setDateOuverture(rs.getString("dateOuverture"));
+			compte.setSolde(rs.getDouble("solde"));
+			compte.setTypeCarte(rs.getString("typeCarte"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return compte;
+	}
+
+	// Méthode retournant le compte épargne associé au client en paramètre d'entrée
+	// de méthode.
+	/**
+	 * @param client
+	 * @param compte
+	 * @return
+	 */
+	public Epargne getCompteEpargne(Client client) {
+		Epargne compte = new Epargne();
+
+		try {
+			Statement stmt = Connexion.connexion().createStatement(); // Création d'un objet de type Statement
+
+			// Affectation à la chaine de caractère s de la requète SQL
+			String s = "Select * from compte inner Join client on compte.idClient = client.idClient where typeDeCompte = 'épargne' && idClient = "
+					+ client.getIdClient();
+
+			// exécution de la requète
+			ResultSet rs = stmt.executeQuery(s);
+			// Lecture des résultats de la requète
+			rs.next();
+			compte.setIdCompte(rs.getInt("IdCompte"));
+			compte.setNumeroCompte(rs.getInt("numeroCompte"));
+			compte.setDateOuverture(rs.getString("dateOuverture"));
+			compte.setSolde(rs.getDouble("solde"));
+			compte.setTauxInteret(rs.getDouble("tauxInteret"));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return compte;
 	}
 }

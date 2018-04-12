@@ -2,32 +2,35 @@ package domaine;
 
 public class Client {
 int idClient;
-String nom;
-String prenom;
-int age;
-int idConseiller;
-
+private String nom;
+private String prenom;
+private String adresse;
+private String codePostal;
+private String ville;
+private String telephone;
+private String situationProfessionnel;
+private String situationFinanciere;
+private double soldeTotal;
+private int idConseiller;
 
 
 public Client() {
-	this.idClient = 7;
-	this.nom = "babar";
-	this.prenom = "bob";
-	this.age = 21;
-	this.idConseiller = 1;}
 
-
-
-public Client(int idClient, String nom, String prenom, int age, int idConseiller) {
-	this.idClient = idClient;
-	this.nom = nom;
-	this.prenom = prenom;
-	this.age = age;
-	this.idConseiller = idConseiller;
 }
 
-public int getIdClient() {
-	return idClient;
+
+
+
+
+
+public double getSoldeTotal() {
+	return soldeTotal;
+}
+
+
+
+public void setSoldeTotal(double soldeTotal) {
+	this.soldeTotal = soldeTotal;
 }
 
 
@@ -35,6 +38,97 @@ public int getIdClient() {
 public void setIdClient(int idClient) {
 	this.idClient = idClient;
 }
+
+
+
+public String getAdresse() {
+	return adresse;
+}
+
+
+
+public void setAdresse(String adresse) {
+	this.adresse = adresse;
+}
+
+
+
+public String getCodePostal() {
+	return codePostal;
+}
+
+
+
+public void setCodePostal(String codePostal) {
+	this.codePostal = codePostal;
+}
+
+
+
+public String getVille() {
+	return ville;
+}
+
+
+
+public void setVille(String ville) {
+	this.ville = ville;
+}
+
+
+
+public String getSituationFinanciere() {
+	return situationFinanciere;
+}
+
+
+
+public void setSituationFinanciere(String situationFinanciere) {
+	this.situationFinanciere = situationFinanciere;
+}
+
+
+
+public String getSituationProfessionnel() {
+	return situationProfessionnel;
+}
+
+
+
+public void setSituationProfessionnel(String situationProfessionnel) {
+	this.situationProfessionnel = situationProfessionnel;
+}
+
+
+
+public String getTelephone() {
+	return telephone;
+}
+
+
+
+public void setTelephone(String telephone) {
+	this.telephone = telephone;
+}
+
+
+
+public int getidConseiller() {
+	return idConseiller;
+}
+
+
+
+public void setidConseiller(int idConseiller) {
+	this.idConseiller = idConseiller;
+}
+
+
+
+public int getIdClient() {
+	return idClient;
+}
+
 
 
 
@@ -62,28 +156,9 @@ public void setPrenom(String prenom) {
 
 
 
-public int getAge() {
-	return age;
-}
 
 
-
-public void setAge(int age) {
-	this.age = age;
-}
-
-
-
-public int getIdConseiller() {
-	return idConseiller;
-}
-
-
-
-public void setIdConseiller(int idConseiller) {
-	this.idConseiller = idConseiller;
-}
 public String toString() {
-	return  this.nom + " " + this.prenom + " a "+ this.age + " ans et est le client n°" + this.getIdClient() + " avec comme conseiller le conseiller n°" + this.idConseiller + " ";
+	return  this.nom + " " + this.prenom + " est le client n°" + this.getIdClient() + " avec comme conseiller le conseiller n°" + this.idConseiller + " ";
 }
 }
