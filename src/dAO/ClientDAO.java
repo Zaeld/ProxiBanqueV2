@@ -79,6 +79,7 @@ public class ClientDAO {
 
 			// Lecture des résultats de la requète
 			rs.next();
+			client.setIdClient(rs.getInt("idClient"));
 			client.setAdresse(rs.getString("adresse"));
 			client.setNom(rs.getString("nom"));
 			client.setPrenom(rs.getString("prenom"));
@@ -117,7 +118,7 @@ public class ClientDAO {
 					+ "', situationFinanciere = '" + client.getSituationFinanciere() + "', situationProfessionnel = '"
 					+ client.getSituationProfessionnel() + "', idConseiller = " + client.getidConseiller()
 					+ ", telephone = '" + client.getTelephone() + "', soldeTotal = " + client.getSoldeTotal()
-					+ " where idClient = " + client.getIdClient();
+					+ " where idClient = " + client.getIdClient()+"";
 			// exécution de la requète
 			stmt.executeUpdate(s);
 
@@ -126,6 +127,7 @@ public class ClientDAO {
 			ResultSet rs = stmt.executeQuery(s);
 			// Lecture des résultats de la requète
 			rs.first();
+			client.setIdClient(rs.getInt("idClient"));
 			client.setAdresse(rs.getString("adresse"));
 			client.setNom(rs.getString("nom"));
 			client.setPrenom(rs.getString("prenom"));
@@ -205,6 +207,7 @@ public class ClientDAO {
 			// boucle
 			while (rs.next()) {
 				Client client = new Client();
+				client.setIdClient(rs.getInt("idClient"));
 				client.setAdresse(rs.getString("adresse"));
 				client.setNom(rs.getString("nom"));
 				client.setPrenom(rs.getString("prenom"));
@@ -245,6 +248,7 @@ public class ClientDAO {
 			// boucle
 			while (rs.next()) {
 				Client client = new Client();
+				client.setIdClient(rs.getInt("idClient"));
 				client.setAdresse(rs.getString("adresse"));
 				client.setNom(rs.getString("nom"));
 				client.setPrenom(rs.getString("prenom"));
@@ -277,20 +281,20 @@ public class ClientDAO {
 			Statement stmt = Connexion.connexion().createStatement(); // Création d'un objet de type Statement
 
 			// Affectation à la chaine de caractère s de la requète SQL
-			String s = "Select * from compte inner Join client on compte.idClient = client.idClient where typeDeCompte = 'courant' && idClient = "
+			String s = "Select * from compte inner Join client on compte.idClient = client.idClient where typeDeCompte = 'courant' && client.idClient = "
 					+ client.getIdClient();
 
 			// exécution de la requète
 			ResultSet rs = stmt.executeQuery(s);
 			// Lecture des résultats de la requète
-			rs.next();
+			rs.first();
 			compte.setIdCompte(rs.getInt("IdCompte"));
 			compte.setNumeroCompte(rs.getInt("numeroCompte"));
-			compte.setdecouvertAutorise(rs.getDouble("decouvertAutorise"));
+			compte.setDecouvertAutorise(rs.getDouble("decouvertAutorise"));
 			compte.setSolde(rs.getDouble("solde"));
 			compte.setTypeCarte(rs.getString("typeCarte"));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			return null;
 		}
 		return compte;
 	}
@@ -309,7 +313,7 @@ public class ClientDAO {
 			Statement stmt = Connexion.connexion().createStatement(); // Création d'un objet de type Statement
 
 			// Affectation à la chaine de caractère s de la requète SQL
-			String s = "Select * from compte inner Join client on compte.idClient = client.idClient where typeDeCompte = 'épargne' && idClient = "
+			String s = "Select * from compte inner Join client on compte.idClient = client.idClient where typeDeCompte = 'épargne' && client.idClient = "
 					+ client.getIdClient();
 
 			// exécution de la requète
@@ -322,8 +326,8 @@ public class ClientDAO {
 			compte.setTauxInteret(rs.getDouble("tauxInteret"));
 
 		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+return null;
+}
 		return compte;
 	}
 }

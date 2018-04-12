@@ -36,7 +36,7 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li><a href="ServletRetourAcceuil?idConseiller=${conseiller.getIdConseiller()}">Acceuil</a></li>
+				<li><a href="acceuilV2.jsp">Acceuil</a></li>
 				<li class="active"><a href="#">Créer un client</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -54,7 +54,7 @@
 				<div class="jumbotron">
 					<h2 class="text-center">Création du client</h2>
 				</div>
-				<form method=post action="ServletCreerClient">
+				<form method=post " action="ServletCreerClient?idConseiller=${conseiller.getIdConseiller}">
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label for="inputName">Nom</label> <input type="text"
@@ -73,22 +73,22 @@
 									Professionnelle : </label>
 								<div class="form-inline text-center">
 									<input class="form-check-input" name="situationProfessionelle"
-										type="radio" id="particulier" checked="checked"> <label
+										type="radio" id="radio" checked="checked"> <label
 										class="form-check-label" for="particulier" target="check">Particulier</label>
 									<input class="form-check-input" name="situationProfessionelle"
-										type="radio" id="entreprise"> <label
+										type="radio" id="radio"> <label
 										class="form-check-label" for="entreprise">Entreprise</label>
 								</div>
 							</div>
 						</div>
 						<div class="form-group col-md-4">
-							<label for="inputMail">Email</label> <input type="email"
-								class="form-control" id="inputMail" placeholder="Email"
-								name="email">
+							<label for="inputMail">Email</label> <input
+								type="email" class="form-control" id="inputMail"
+								placeholder="Email" name="email">
 						</div>
 						<div class="form-group col-md-4">
 							<label for="inputPhone">Numéro de téléphone</label> <input
-								type="tel" class="form-control" id="inputPhone"
+								type="number" class="form-control" id="inputPhone"
 								placeholder="Numéro de télpéhone" name="numeroTelephone">
 						</div>
 					</div>
@@ -100,18 +100,13 @@
 						</div>
 					</div>
 					<div class="form-row">
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-4">
 							<label for="inputCp">Code Postale</label> <input type="number"
 								class="form-control" id="inputCp" name="codePostal">
 						</div>
-						<div class="form-group col-md-7">
+						<div class="form-group col-md-8">
 							<label for="inputVille">Ville</label> <input type="text"
 								class="form-control" id="inputVille" name="ville">
-						</div>
-						<div class="form-group col-md-2">
-							<label for="inputIdConseiller">Id du Conseiller</label> <input
-								type="number" readonly class="form-control" id="inputVille"
-								value="${conseiller.getIdConseiller()}" name="idConseiller">
 						</div>
 					</div>
 					<div class="form-row text-center">

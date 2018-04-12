@@ -46,13 +46,8 @@ public class ServletCreerClient extends HttpServlet {
 		String cp = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
 		String id = request.getParameter("idConseiller");
-		
-		int idConseiller;
-		if (id.equals(null)) {
-			idConseiller = 0;
-		}else {
-			idConseiller = Integer.parseInt(id);
-		}
+		int idConseiller = Integer.parseInt(id);
+
 		
 		//creation d'un client avec les infos recuperees
 		Client monClient = new Client(nom, prenom, adresse, cp, ville, email, numtel, sitprof, idConseiller);

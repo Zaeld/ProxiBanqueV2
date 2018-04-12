@@ -23,7 +23,6 @@ public class Client {
 	// Constructeur par défaut et paramétré
 
 	public Client() {
-		this.idClient=1;
 		this.situationProfessionnel = "particulier";
 		this.situationFinanciere = "normal";
 		this.soldeTotal = 0;
@@ -33,10 +32,12 @@ public class Client {
 		super();
 		this.idClient = idClient;
 	}
+	// Constructeur pour la modification du client
 
-	public Client(String nom, String prenom, String adresse, String codePostal, String ville, String email,
-			String telephone, String situationProfessionnel) {
+	public Client(int idClient, String nom, String prenom, String adresse, String codePostal, String ville, String email,
+			String telephone, String situationProfessionnel, int idConseiller) {
 		super();
+		this.idClient=idClient;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
@@ -45,8 +46,10 @@ public class Client {
 		this.email = email;
 		this.telephone = telephone;
 		this.situationProfessionnel = situationProfessionnel;
-	}
+		this.idConseiller = idConseiller;
 
+	}
+	// Constructeur pour la création de client
 
 	public Client(String nom, String prenom, String adresse, String codePostal, String ville, String email,
 			String telephone, String situationProfessionnel, int idConseiller) {

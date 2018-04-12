@@ -33,22 +33,23 @@
 	</nav>
 
 	<div class="container-fluid text-center">
-		<div class="jumbotron text-center">
-			<h2 target="danger">Echec d'authentification du Conseiller.
-				Essayer à nouveau.</h2>
-			<br>
-			<div class="text-center">
-				<a class="btn btn-default btn-lg" href="index.html" role="button">Retour</a>
-			</div>
-
+		<div class="jumbotron">
+			<h2 target="danger">Echec d'authentification du Conseiller. Essayer à nouveau.</h2>
 		</div>
 
-		<footer class="container-fluid">
-		<div class="text-center">ProxiBanqueSI the best for bank
-			administration</div>
-		<div class="text-right">B. Blondel & A. Demolis All right
-			reserved</div>
-		</footer>
+		<div class="text-center">
+		<a class="btn btn-default btn-lg" href="index.html" role="button">Retour</a>
+		</div>
+
+	</div>
+
+	<footer class="container-fluid">
+	<div class="text-center">ProxiBanqueSI the best for bank
+		administration</div>
+	<div class="text-right">B. Blondel & A. Demolis All right
+		reserved</div>
+	</footer>
+
 </body>
 
 </html>

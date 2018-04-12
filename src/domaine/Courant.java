@@ -9,7 +9,7 @@ public class Courant extends CompteBancaire {
 
 	// Déclaration des attributs caractérisant un objet de type Courant
 	private double decouvertAutorise;
-	private String TypeCarte;
+	private String typeCarte;
 
 	// Constructeur par défaut
 	public Courant() {
@@ -19,19 +19,19 @@ public class Courant extends CompteBancaire {
 	}
 
 	// Getters et Setters
-	public double getdecouvertAutorise() {
+	public double getDecouvertAutorise() {
 		return decouvertAutorise;
 	}
 
 	public String getTypeCarte() {
-		return TypeCarte;
+		return typeCarte;
 	}
 
 	public void setTypeCarte(String typeCarte) {
-		TypeCarte = typeCarte;
+		this.typeCarte = typeCarte;
 	}
 
-	public void setdecouvertAutorise(double d) {
+	public void setDecouvertAutorise(double d) {
 		this.decouvertAutorise = d;
 	}
 

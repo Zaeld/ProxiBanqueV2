@@ -36,7 +36,7 @@ public class CompteCourantDAO {
 		try {
 			// Affectation à la chaine de caractère s de la requète SQL
 			String s = "INSERT INTO `compte`(`numeroCompte`, `decouvertAutorise`, `solde`, `typeCarte`, `idClient`, `typeDeCompte`)"
-					+ " VALUES ( " + compte.getNumeroCompte() + ", " + compte.getdecouvertAutorise() + ", "
+					+ " VALUES ( " + compte.getNumeroCompte() + ", " + compte.getDecouvertAutorise() + ", "
 					+ compte.getSolde() + ", '" + compte.getTypeCarte() + "', " + compte.getIdClient() + ", '"+compte.getTypeDeCompte()+")";
 			Statement stmt = Connexion.connexion().prepareStatement(s); // Création d'un objet de type Statement
 			// exécution de la requète
@@ -72,7 +72,7 @@ public class CompteCourantDAO {
 			rs.next();
 			compte.setIdCompte(rs.getInt("IdCompte"));
 			compte.setNumeroCompte(rs.getInt("numeroCompte"));
-			compte.setdecouvertAutorise(rs.getDouble("decouvertAutorise"));
+			compte.setDecouvertAutorise(rs.getDouble("decouvertAutorise"));
 			compte.setSolde(rs.getDouble("solde"));
 			compte.setTypeCarte(rs.getString("typeCarte"));
 
@@ -97,7 +97,7 @@ public class CompteCourantDAO {
 
 			// Affectation à la chaine de caractère s de la requète SQL
 			String s = "UPDATE compte set numeroCompte = '" + compte.getNumeroCompte() + "', decouvertAutorise = '"
-					+ compte.getdecouvertAutorise() + "', solde = " + compte.getSolde() + ", typeCarte = '"
+					+ compte.getDecouvertAutorise() + "', solde = " + compte.getSolde() + ", typeCarte = '"
 					+ compte.getTypeCarte() + "' where idcompte = " + compte.getIdCompte();
 			// exécution de la requète
 			stmt.executeUpdate(s);
@@ -109,7 +109,7 @@ public class CompteCourantDAO {
 			rs.first();
 			compte.setIdCompte(rs.getInt("IdCompte"));
 			compte.setNumeroCompte(rs.getInt("numeroCompte"));
-			compte.setdecouvertAutorise(rs.getDouble("decouvertAutorise"));
+			compte.setDecouvertAutorise(rs.getDouble("decouvertAutorise"));
 			compte.setSolde(rs.getDouble("solde"));
 			compte.setTypeCarte(rs.getString("typeCarte"));
 		} catch (SQLException e) {
@@ -168,7 +168,7 @@ public class CompteCourantDAO {
 				Courant compte = new Courant();
 				compte.setIdCompte(rs.getInt("IdCompte"));
 				compte.setNumeroCompte(rs.getInt("numeroCompte"));
-				compte.setdecouvertAutorise(rs.getDouble("decouvertAutorise"));
+				compte.setDecouvertAutorise(rs.getDouble("decouvertAutorise"));
 				compte.setSolde(rs.getDouble("solde"));
 				compte.setTypeCarte(rs.getString("typeCarte"));
 				listCCourant.add(compte);

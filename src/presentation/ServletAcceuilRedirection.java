@@ -64,6 +64,7 @@ public class ServletAcceuilRedirection extends HttpServlet {
 			//Récupération de tous les comptes et des clients associés
 			GestionCompteService serviceCompte = new GestionCompteService();
 			List<CompteBancaire> listeCompte = serviceCompte.getAllCompte();
+			
 			request.setAttribute("courant", courant);
 			request.setAttribute("epargne", epargne);
 			request.setAttribute("listeCompte", listeCompte);

@@ -36,6 +36,7 @@ public class ServletModifierClient extends HttpServlet {
 			throws ServletException, IOException {
 
 		// recuperation des donnees
+		String idClientS = request.getParameter("idClient");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
 		String sitprof = request.getParameter("situationProfessionelle");
@@ -44,9 +45,13 @@ public class ServletModifierClient extends HttpServlet {
 		String adresse = request.getParameter("adresse");
 		String cp = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
+		String id = request.getParameter("idConseiller");
+		int idConseiller = Integer.parseInt(id);
 
-		// TODO creation d'un client avec les infos recuperees
-		Client monClient = new Client(nom, prenom, adresse, cp, ville, numtel, email, sitprof);
+		int idClient = Integer.parseInt(idClientS);
+		
+		// creation d'un client avec les infos recuperees
+		Client monClient = new Client(idClient, nom, prenom, adresse, cp, ville, email, numtel,  sitprof, idConseiller);
 
 		// les parametre de la requete sont soumis a la couche service et recuperation de la reponse
 		ClientService service = new ClientService();

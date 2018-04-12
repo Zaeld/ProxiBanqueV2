@@ -2,10 +2,16 @@ package testJUnit;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.hamcrest.core.IsEqual;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized.Parameters;
+import org.junit.runners.Parameterized;
+
 
 import dAO.ClientDAO;
 import dAO.CompteCourantDAO;
@@ -16,7 +22,24 @@ import domaine.Epargne;
 import service.GestionClientService;
 import service.IGestionClientFortunes;
 
-public class GestionClientServiceTest {
+@RunWith(Parameterized.class)
+public class GestionClientServiceTestParametre {
+	private String situationProfessionnel;
+	private double soldeTotal;
+	
+	public GestionClientServiceTestParametre(String situationProfessionnel, double soldeTotal) {
+		super();
+		this.situationProfessionnel = situationProfessionnel;
+		this.soldeTotal=soldeTotal;
+	}
+
+	@Parameters
+	static public List<Object[]> getParameters() {
+		Object[][] parameters = { { "particulier", 200000 }, 
+								{ "particulier", 1000000 }, 
+								{ "entreprise", 200000 } };
+		return Arrays.asList(parameters);
+	}
 	private static int idTest = 2;
 	GestionClientService service = new GestionClientService();
 	static ClientDAO dao = new ClientDAO();
@@ -52,60 +75,21 @@ public class GestionClientServiceTest {
 	@Test
 	public void verifClientFortuneTest() {
 		String résultat;
-		client.setSituationProfessionnel("particulier");
-		client.setSoldeTotal(1000000);
+		client.setSituationProfessionnel(situationProfessionnel);
+		client.setSoldeTotal(soldeTotal);
 		double totalSolde = client.getSoldeTotal();
 		résultat = service.verifClientFortune(client).getSituationFinanciere();
+		if (situationProfessionnel.equals("particulier")) {
 		if (totalSolde > IGestionClientFortunes.valeurIsFortune) {
 			assertThat(résultat, IsEqual.equalTo("riche"));
 		} else {
 			assertThat(résultat, IsEqual.equalTo("normal"));
 		}
-	}
+	} else {
+		assertThat(résultat, IsEqual.equalTo("riche"));
 
-	@Test
-	public void verifClientFortuneTest1() {
-		String résultat;
-		client.setSituationProfessionnel("particulier");
-		client.setSoldeTotal(200000);
-		double totalSolde = client.getSoldeTotal();
-		résultat = service.verifClientFortune(client).getSituationFinanciere();
-		if (totalSolde > IGestionClientFortunes.valeurIsFortune) {
-			assertThat(résultat, IsEqual.equalTo("riche"));
-		} else {
-			assertThat(résultat, IsEqual.equalTo("normal"));
-		}
 	}
-
-	@Test
-	public void verifClientFortuneTest2() {
-		String résultat;
-		client.setSituationProfessionnel("entreprise");
-		client.setSoldeTotal(1000000);
-		résultat = service.verifClientFortune(client).getSituationFinanciere();
-		assertThat(résultat, IsEqual.equalTo("normal"));
 	}
-	@Test
-	public void calculSommeTotalTest() {
-		courant.setSolde(100000);
-		epargne.setSolde(25000);
-		double monsolde = 100000;
-		client=service.calculSommeTotal(client);
-		assertThat(monsolde, IsEqual.equalTo(client.getSoldeTotal()));
-	}
-	public void calculSommeTotalTest1() {
-		courant.setSolde(2000);
-		epargne.setSolde(25000);
-		double monsolde = 2000;
-		client=service.calculSommeTotal(client);
-		assertThat(monsolde, IsEqual.equalTo(client.getSoldeTotal()));
-	}
-@AfterClass
-public static void afterAll() {
-	// La base de donnée est restaurée grace aux sauvegardes
-	dao.updateClient(clientsave);
-	courantdao.updateCourant(courantsave);
-	epargnedao.updateEpargne(epargnesave);
-
 }
-}
+
+
