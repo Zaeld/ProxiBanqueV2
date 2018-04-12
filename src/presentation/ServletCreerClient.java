@@ -55,7 +55,7 @@ public class ServletCreerClient extends HttpServlet {
 		}
 		
 		//creation d'un client avec les infos recuperees
-		Client monClient = new Client(nom, prenom, adresse, cp, ville, numtel, email, sitprof, idConseiller);
+		Client monClient = new Client(nom, prenom, adresse, cp, ville, email, numtel, sitprof, idConseiller);
 
 		// les parametres de la requete sont soumis a la couche service et recuperation de la réponse
 		ClientService service = new ClientService();

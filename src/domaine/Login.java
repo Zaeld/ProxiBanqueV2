@@ -1,51 +1,50 @@
 package domaine;
 
+/**
+ * @author Stagiaire
+ *
+ */
 public class Login {
-private int idLogin;
-private String login;
-private String motDePasse;
-private int idConseiller;
 
-public Login(String identifiant, String motDePasse) {
-	super();
-	this.idLogin = 0;
-	this.login = identifiant;
-	this.motDePasse = motDePasse;
-	this.idConseiller = 0;
-}
+	// Déclaration des attributs caractérisant un objet de type Login
 
-public int getIdLogin() {
-	return idLogin;
-}
+	private String login;
+	private String motDePasse;
+	private int idConseiller;
 
-public void setIdLogin(int idLogin) {
-	this.idLogin = idLogin;
-}
+	// Constructeur paramétré
 
-public String getIdentifiant() {
-	return login;
-}
+	public Login(String identifiant, String motDePasse) {
+		super();
+		this.login = identifiant;
+		this.motDePasse = motDePasse;
+		this.idConseiller = 0;
+	}
 
-public void setIdentifiant(String identifiant) {
-	this.login = identifiant;
-}
+	// Getters et Setters
 
-public String getMotDePasse() {
-	return motDePasse;
-}
+	public String getIdentifiant() {
+		return login;
+	}
 
-public void setMotDePasse(String motDePasse) {
-	this.motDePasse = motDePasse;
-}
+	public void setIdentifiant(String identifiant) {
+		this.login = identifiant;
+	}
 
-public int getIdConseiller() {
-	return idConseiller;
-}
+	public String getMotDePasse() {
+		return motDePasse;
+	}
 
-public void setIdConseiller(int idEmploye) {
-	this.idConseiller = idEmploye;
-}
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
+	}
 
+	public int getIdConseiller() {
+		return idConseiller;
+	}
 
+	public void setIdConseiller(int idEmploye) {
+		this.idConseiller = idEmploye;
+	}
 
 }

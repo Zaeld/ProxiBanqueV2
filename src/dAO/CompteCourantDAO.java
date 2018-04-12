@@ -7,10 +7,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import domaine.Client;
 import domaine.Courant;
 
-
+/**
+ * @author Stagiaire
+ *
+ */
 public class CompteCourantDAO {
 	// CompteCourantDAO est la classe dans la couche DAO qui permet d'accéder aux
 	// informations de la table 'Compte'de la base de donnée spécifiée dans la
@@ -33,10 +35,9 @@ public class CompteCourantDAO {
 		boolean b = false;
 		try {
 			// Affectation à la chaine de caractère s de la requète SQL
-			String s = "INSERT INTO `compte`(`numeroCompte`, `decouvertAutorise`, `dateOuverture`, `solde`, `typeCarte`, `idClient`)"
-					+ " VALUES ( " + compte.getNumeroCompte() + ", " + compte.getdecouvertAutorise() + ", '"
-					+ compte.getDateOuverture() + "', " + compte.getSolde() + ", '" + compte.getTypeCarte() + "', "
-					+ compte.getIdClient() + ")";
+			String s = "INSERT INTO `compte`(`numeroCompte`, `decouvertAutorise`, `solde`, `typeCarte`, `idClient`)"
+					+ " VALUES ( " + compte.getNumeroCompte() + ", " + compte.getdecouvertAutorise() + ", "
+					+ compte.getSolde() + ", '" + compte.getTypeCarte() + "', " + compte.getIdClient() + ")";
 			Statement stmt = Connexion.connexion().prepareStatement(s); // Création d'un objet de type Statement
 			// exécution de la requète
 			i = stmt.executeUpdate(s);
@@ -72,7 +73,6 @@ public class CompteCourantDAO {
 			compte.setIdCompte(rs.getInt("IdCompte"));
 			compte.setNumeroCompte(rs.getInt("numeroCompte"));
 			compte.setdecouvertAutorise(rs.getDouble("decouvertAutorise"));
-			compte.setDateOuverture(rs.getString("dateOuverture"));
 			compte.setSolde(rs.getDouble("solde"));
 			compte.setTypeCarte(rs.getString("typeCarte"));
 
@@ -97,9 +97,8 @@ public class CompteCourantDAO {
 
 			// Affectation à la chaine de caractère s de la requète SQL
 			String s = "UPDATE compte set numeroCompte = '" + compte.getNumeroCompte() + "', decouvertAutorise = '"
-					+ compte.getdecouvertAutorise() + "', dateOuverture = '" + compte.getDateOuverture() + "', solde = "
-					+ compte.getSolde() + ", typeCarte = '" + compte.getTypeCarte() + "' where idcompte = "
-					+ compte.getIdCompte();
+					+ compte.getdecouvertAutorise() + "', solde = " + compte.getSolde() + ", typeCarte = '"
+					+ compte.getTypeCarte() + "' where idcompte = " + compte.getIdCompte();
 			// exécution de la requète
 			stmt.executeUpdate(s);
 			// Affectation à la chaine de caractère s de la requète SQL
@@ -111,7 +110,6 @@ public class CompteCourantDAO {
 			compte.setIdCompte(rs.getInt("IdCompte"));
 			compte.setNumeroCompte(rs.getInt("numeroCompte"));
 			compte.setdecouvertAutorise(rs.getDouble("decouvertAutorise"));
-			compte.setDateOuverture(rs.getString("dateOuverture"));
 			compte.setSolde(rs.getDouble("solde"));
 			compte.setTypeCarte(rs.getString("typeCarte"));
 		} catch (SQLException e) {
@@ -171,7 +169,6 @@ public class CompteCourantDAO {
 				compte.setIdCompte(rs.getInt("IdCompte"));
 				compte.setNumeroCompte(rs.getInt("numeroCompte"));
 				compte.setdecouvertAutorise(rs.getDouble("decouvertAutorise"));
-				compte.setDateOuverture(rs.getString("dateOuverture"));
 				compte.setSolde(rs.getDouble("solde"));
 				compte.setTypeCarte(rs.getString("typeCarte"));
 				listCCourant.add(compte);

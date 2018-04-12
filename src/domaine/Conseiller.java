@@ -1,14 +1,29 @@
 package domaine;
 
+/**
+ * @author Stagiaire
+ *
+ */
 public class Conseiller {
+
+	// Déclaration des attributs caractérisant un objet de type Conseiller
+
 	private int idConseiller;
 	private String nom;
 	private String prenom;
 
+	// Constructeur par défaut et paramétré
+
 	public Conseiller() {
 		super();
-
 	}
+
+	public Conseiller(String nom, String prenom) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+	}
+	// Getters et Setters
 
 	public int getIdConseiller() {
 		return idConseiller;
@@ -33,7 +48,5 @@ public class Conseiller {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-
-	
 
 }

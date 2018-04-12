@@ -1,38 +1,26 @@
 package domaine;
 
-import domaine.Client;
-
-//import java.text.SimpleDateFormat;
-//import java.util.Date;
-
-
-
+/**
+ * @author Stagiaire
+ *
+ */
 public abstract class CompteBancaire {
+	// Compte Bancaire est une classe abstraite dont vont hérités les classes
+	// Courant et Epargne
 
-	// propriétés
-	int idCompte;
+	// Déclaration des attributs caractérisant un objet héritant de la classe
+	// CompteBancaire
+	private int idCompte;
 	private int numCompte;
 	private double solde;
-	private String dateOuverture;
-	int idClient;
+	private int idClient;
 
-	
-	// constructors
+	// Constructeur par défaut
 	public CompteBancaire() {
 		this.numCompte = (int) (Math.random() * 10000);
-		this.solde = 12;
-		this.dateOuverture = "lundi";
-		this.idCompte=1;
 	}
 
-	public CompteBancaire(String date, Client client) {
-		this.solde = 0;
-		this.dateOuverture = date;
-		this.numCompte = (int) (Math.random() * 10000);
-
-	}
-
-	// getters et setters
+	// Getters et Setters
 	public int getNumeroCompte() {
 		return numCompte;
 	}
@@ -49,13 +37,6 @@ public abstract class CompteBancaire {
 		this.solde = solde;
 	}
 
-	public String getDateOuverture() {
-		return dateOuverture;
-	}
-
-	public void setDateOuverture(String dateOuverture) {
-		this.dateOuverture = dateOuverture;
-	}
 	public int getIdClient() {
 		return idClient;
 	}
@@ -72,9 +53,8 @@ public abstract class CompteBancaire {
 		this.idCompte = idCompte;
 	}
 
-	// toString
+	// Redéfinition de la méthode toString()
 	public String toString(int numeroCompte) {
-		return "Le compte de numéro " + this.numCompte + " a pour solde " + this.solde + " euros, a été créé le "
-				+ this.dateOuverture;
+		return "Le compte de numéro " + this.numCompte + " a pour solde " + this.solde + " euros.";
 	}
 }

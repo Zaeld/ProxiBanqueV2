@@ -10,7 +10,12 @@ import domaine.CompteBancaire;
 import domaine.Courant;
 import domaine.Epargne;
 
+/**
+ * @author Stagiaire
+ *
+ */
 public class GestionCompteService {
+	// Déclaration
 	CompteCourantDAO courantDAO = new CompteCourantDAO();
 	CompteEpargneDAO epargneDAO = new CompteEpargneDAO();
 
@@ -50,6 +55,7 @@ public class GestionCompteService {
 		else
 			return false;
 	}
+
 	public boolean VirementCourantAEpargne(Courant comptedébiteur, Epargne comptecréditeur, double somme) {
 		double solde1avant = comptedébiteur.getSolde();
 		double solde2avant = comptecréditeur.getSolde();
@@ -59,7 +65,8 @@ public class GestionCompteService {
 			return true;
 		else
 			return false;
-		}
+	}
+
 	public boolean VirementEpargneACourant(Epargne comptedébiteur, Courant comptecréditeur, double somme) {
 		double solde1avant = comptedébiteur.getSolde();
 		double solde2avant = comptecréditeur.getSolde();
@@ -69,7 +76,8 @@ public class GestionCompteService {
 			return true;
 		else
 			return false;
-		}
+	}
+
 	// Méthode retournant toutes les entrées de la table 'compte' de la
 	// base de donnée.
 	/**
@@ -77,10 +85,9 @@ public class GestionCompteService {
 	 * @param CEpargneDAO
 	 * @return
 	 */
-	public List<Courant> getAllCompte(CompteCourantDAO CCourantDAO, CompteEpargneDAO CEpargneDAO) {
+	public List<CompteBancaire> getAllCompte(CompteCourantDAO CCourantDAO, CompteEpargneDAO CEpargneDAO) {
 
-		List<Epargne> listCEpargne = new ArrayList<Epargne>();
-		List listCompte = new ArrayList<CompteBancaire>();
+		List<CompteBancaire> listCompte = new ArrayList<CompteBancaire>();
 		listCompte.addAll(CCourantDAO.getAllCourant());
 		listCompte.addAll(CEpargneDAO.getAllEpargne());
 		return listCompte;

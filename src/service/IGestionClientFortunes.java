@@ -1,9 +1,11 @@
 package service;
 
+/**
+ * @author Stagiaire
+ *
+ */
 public interface IGestionClientFortunes {
-	// propriété 
-	public final double valeurIsRich = 500000;
+	// L'interface IGestionClientFortunes permet de ne pas utiliser une valeur en dur dans la méthode verifClientFortune 
+	public final double valeurIsFortune = 500000;
 	
-	// méthode
-	public String gestionPatrimoine();
 }

@@ -1,24 +1,23 @@
 package domaine;
 
-import domaine.Client;
-
+/**
+ * @author Stagiaire
+ *
+ */
 public class Epargne extends CompteBancaire {
-	
-	// propriété
+
+	// La classe Epargne hérite de la classe abstraite CompteBancaire
+
+	// Déclaration des attributs caractérisant un objet de type Epargne
 	private double tauxInteret;
-	
-	// constructor
+
+	// Constructeur par défaut
 	public Epargne() {
 		super();
+		this.tauxInteret = 3.00;
 	}
 
-	public Epargne(String formater, Client client) {
-		super(formater, client);
-		this.tauxInteret = 3.00;
-//		super.setNumeroCompte(001);
-	}
-	
-	// getter et setter
+	// Getters et Setters
 	public double getTauxInteret() {
 		return tauxInteret;
 	}
@@ -26,9 +25,9 @@ public class Epargne extends CompteBancaire {
 	public void setTauxInteret(double taux) {
 		this.tauxInteret = taux;
 	}
-	
-	// toString
+
+	// Redéfinition de la méthode toString()
 	public String toString() {
-		return super.toString(this.getNumeroCompte()) + " et a un taux d'épargne de " + this.tauxInteret +"%";
+		return super.toString(this.getNumeroCompte()) + " et a un taux d'épargne de " + this.tauxInteret + "%";
 	}
 }

@@ -8,10 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domaine.Client;
+import domaine.Conseiller;
 import domaine.Courant;
 import domaine.Epargne;
 
-
+/**
+ * @author Stagiaire
+ *
+ */
 public class ClientDAO {
 
 	// ClientDAO est la classe dans la couche DAO qui permet d'accéder aux
@@ -20,7 +24,7 @@ public class ClientDAO {
 	// Un client correspond à une ligne de la table.
 	// Cette classe permet de créer, lire les informations, modifier, supprimer un
 	// client, de récupérer ses comptes et de récupérer la liste de la totalité des
-	// clients.
+	// clients ou seulement ceux propre à un conseiller.
 
 	// Méthode permettant d'insérer un client en base de donnée en prenant un objet
 	// de type client en entrée et retournant un boolean de valeur true si
@@ -36,11 +40,11 @@ public class ClientDAO {
 			Statement stmt = Connexion.connexion().createStatement(); // Création d'un objet de type Statement
 
 			// Affectation à la chaine de caractère s de la requète SQL
-			String s = "INSERT INTO `client`(`adresse`, `nom`, `prenom`, `codePostal`, `ville`, `situationFinanciere`, `situationProfessionnel`, `idConseiller`, `telephone`, `soldeTotal`) VALUES ('"
+			String s = "INSERT INTO `client`(`adresse`, `nom`, `prenom`, `codePostal`, `ville`, `email`, `situationFinanciere`, `situationProfessionnel`, `idConseiller`, `telephone`, `soldeTotal`) VALUES ('"
 					+ client.getAdresse() + "', '" + client.getNom() + "', '" + client.getPrenom() + "', '"
-					+ client.getCodePostal() + "', '" + client.getVille() + "', '" + client.getSituationFinanciere()
-					+ "', '" + client.getSituationProfessionnel() + "', " + client.getidConseiller() + ", '"
-					+ client.getTelephone() + "', " + client.getSoldeTotal() + ")";
+					+ client.getCodePostal() + "', '" + client.getVille() + "', '" + client.getEmail() + "', '"
+					+ client.getSituationFinanciere() + "', '" + client.getSituationProfessionnel() + "', "
+					+ client.getidConseiller() + ", '" + client.getTelephone() + "', " + client.getSoldeTotal() + ")";
 
 			// exécution de la requète
 			i = stmt.executeUpdate(s);
@@ -80,6 +84,7 @@ public class ClientDAO {
 			client.setPrenom(rs.getString("prenom"));
 			client.setCodePostal(rs.getString("codePostal"));
 			client.setVille(rs.getString("ville"));
+			client.setEmail(rs.getString("email"));
 			client.setSituationFinanciere(rs.getString("situationFinanciere"));
 			client.setSituationProfessionnel(rs.getString("situationProfessionnel"));
 			client.setidConseiller(rs.getInt("idConseiller"));
@@ -108,11 +113,11 @@ public class ClientDAO {
 			// Affectation à la chaine de caractère s de la requète SQL
 			String s = "UPDATE client set adresse = '" + client.getAdresse() + "', nom = '" + client.getNom()
 					+ "', prenom = '" + client.getPrenom() + "', CodePostal = '" + client.getCodePostal()
-					+ "', ville = '" + client.getVille() + "', situationFinanciere = '"
-					+ client.getSituationFinanciere() + "', situationProfessionnel = '"
-					+ client.getSituationProfessionnel() + "', idConseiller = " + client.getidConseiller() + ", telephone = '"
-					+ client.getTelephone() + "', soldeTotal = " + client.getSoldeTotal() + ", where idClient = "
-					+ client.getIdClient();
+					+ "', ville = '" + client.getVille() + "', email = '" + client.getEmail()
+					+ "', situationFinanciere = '" + client.getSituationFinanciere() + "', situationProfessionnel = '"
+					+ client.getSituationProfessionnel() + "', idConseiller = " + client.getidConseiller()
+					+ ", telephone = '" + client.getTelephone() + "', soldeTotal = " + client.getSoldeTotal()
+					+ ", where idClient = " + client.getIdClient();
 			// exécution de la requète
 			stmt.executeUpdate(s);
 
@@ -126,6 +131,7 @@ public class ClientDAO {
 			client.setPrenom(rs.getString("prenom"));
 			client.setCodePostal(rs.getString("codePostal"));
 			client.setVille(rs.getString("ville"));
+			client.setEmail(rs.getString("email"));
 			client.setSituationFinanciere(rs.getString("situationFinanciere"));
 			client.setSituationProfessionnel(rs.getString("situationProfessionnel"));
 			client.setidConseiller(rs.getInt("idConseiller"));
@@ -204,6 +210,7 @@ public class ClientDAO {
 				client.setPrenom(rs.getString("prenom"));
 				client.setCodePostal(rs.getString("codePostal"));
 				client.setVille(rs.getString("ville"));
+				client.setEmail(rs.getString("email"));
 				client.setSituationFinanciere(rs.getString("situationFinanciere"));
 				client.setSituationProfessionnel(rs.getString("situationProfessionnel"));
 				client.setidConseiller(rs.getInt("idConseiller"));
@@ -217,12 +224,51 @@ public class ClientDAO {
 		return listClient;
 	}
 
+	// Méthode retournant une liste de toute les entrées de la table 'client'
+	// correspondant à l'objet conseiller en entrée de méthode
+	/**
+	 * @param conseiller
+	 * @return
+	 */
+	public List<Client> getAllClientConseiller(Conseiller conseiller) {
+		List<Client> listClient = new ArrayList<Client>();
+
+		try {
+			Statement stmt = Connexion.connexion().createStatement(); // Création d'un objet de type Statement
+
+			// Affectation à la chaine de caractère s de la requète SQL
+			String s = "Select * from Client where idConseiller = " + conseiller.getIdConseiller();
+
+			// exécution de la requète
+			ResultSet rs = stmt.executeQuery(s);
+			// Lecture des résultats de la requète et insertion dans la liste pour chaque
+			// boucle
+			while (rs.next()) {
+				Client client = new Client();
+				client.setAdresse(rs.getString("adresse"));
+				client.setNom(rs.getString("nom"));
+				client.setPrenom(rs.getString("prenom"));
+				client.setCodePostal(rs.getString("codePostal"));
+				client.setVille(rs.getString("ville"));
+				client.setEmail(rs.getString("email"));
+				client.setSituationFinanciere(rs.getString("situationFinanciere"));
+				client.setSituationProfessionnel(rs.getString("situationProfessionnel"));
+				client.setidConseiller(rs.getInt("idConseiller"));
+				client.setTelephone(rs.getString("telephone"));
+				client.setSoldeTotal(rs.getInt("soldeTotal"));
+				listClient.add(client);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listClient;
+	}
 
 	// Méthode retournant le compte courant associé au client en paramètre d'entrée
 	// de méthode.
+	
 	/**
 	 * @param client
-	 * @param compte
 	 * @return
 	 */
 	public Courant getCompteCourant(Client client) {
@@ -241,7 +287,6 @@ public class ClientDAO {
 			compte.setIdCompte(rs.getInt("IdCompte"));
 			compte.setNumeroCompte(rs.getInt("numeroCompte"));
 			compte.setdecouvertAutorise(rs.getDouble("decouvertAutorise"));
-			compte.setDateOuverture(rs.getString("dateOuverture"));
 			compte.setSolde(rs.getDouble("solde"));
 			compte.setTypeCarte(rs.getString("typeCarte"));
 		} catch (SQLException e) {
@@ -252,9 +297,9 @@ public class ClientDAO {
 
 	// Méthode retournant le compte épargne associé au client en paramètre d'entrée
 	// de méthode.
+
 	/**
 	 * @param client
-	 * @param compte
 	 * @return
 	 */
 	public Epargne getCompteEpargne(Client client) {
@@ -273,7 +318,6 @@ public class ClientDAO {
 			rs.next();
 			compte.setIdCompte(rs.getInt("IdCompte"));
 			compte.setNumeroCompte(rs.getInt("numeroCompte"));
-			compte.setDateOuverture(rs.getString("dateOuverture"));
 			compte.setSolde(rs.getDouble("solde"));
 			compte.setTauxInteret(rs.getDouble("tauxInteret"));
 

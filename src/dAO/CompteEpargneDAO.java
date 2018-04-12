@@ -2,7 +2,6 @@ package dAO;
 
 import java.sql.ResultSet;
 
-
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -10,7 +9,10 @@ import java.util.List;
 
 import domaine.Epargne;
 
-
+/**
+ * @author Stagiaire
+ *
+ */
 public class CompteEpargneDAO {
 	// CompteEpargneDAO est la classe dans la couche DAO qui permet d'accéder aux
 	// informations de la table 'Compte'de la base de donnée spécifiée dans la
@@ -34,8 +36,8 @@ public class CompteEpargneDAO {
 		try {
 			// Affectation à la chaine de caractère s de la requète SQL
 			String s = "INSERT INTO `compte`(`numeroCompte`, `tauxInteret`, `dateOuverture`, `solde`, `idClient`)"
-					+ " VALUES ( " + compte.getNumeroCompte() + ", " + compte.getTauxInteret() + ", '"
-					+ compte.getDateOuverture() + "', " + compte.getSolde() + ", " + compte.getIdClient() + ")";
+					+ " VALUES ( " + compte.getNumeroCompte() + ", " + compte.getTauxInteret() + ", "
+					+ compte.getSolde() + ", " + compte.getIdClient() + ")";
 			// Création d'un objet de type Statement
 			Statement stmt = Connexion.connexion().prepareStatement(s);
 			// exécution de la requete
@@ -72,7 +74,6 @@ public class CompteEpargneDAO {
 			compte.setIdCompte(rs.getInt("IdCompte"));
 			compte.setNumeroCompte(rs.getInt("numeroCompte"));
 			compte.setTauxInteret(rs.getDouble("tauxInteret"));
-			compte.setDateOuverture(rs.getString("dateOuverture"));
 			compte.setSolde(rs.getDouble("solde"));
 
 		} catch (SQLException e) {
@@ -95,8 +96,8 @@ public class CompteEpargneDAO {
 			Statement stmt = Connexion.connexion().createStatement(); // Création d'un objet de type Statement
 			// Affectation à la chaine de caractère s de la requète SQL
 			String s = "UPDATE compte set numeroCompte = '" + compte.getNumeroCompte() + "', tauxInteret = '"
-					+ compte.getTauxInteret() + "', dateOuverture = '" + compte.getDateOuverture() + "', solde = "
-					+ compte.getSolde() + " where idcompte = " + compte.getIdCompte();
+					+ compte.getTauxInteret() + ", solde = " + compte.getSolde() + " where idcompte = "
+					+ compte.getIdCompte();
 			stmt.executeUpdate(s);
 			// Affectation à la chaine de caractère s de la requète SQL
 			s = "Select * from compte where idClient = " + compte.getIdCompte();
@@ -106,7 +107,6 @@ public class CompteEpargneDAO {
 			compte.setIdCompte(rs.getInt("IdCompte"));
 			compte.setNumeroCompte(rs.getInt("numeroCompte"));
 			compte.setTauxInteret(rs.getDouble("tauxInteret"));
-			compte.setDateOuverture(rs.getString("dateOuverture"));
 			compte.setSolde(rs.getDouble("solde"));
 
 		} catch (SQLException e) {
@@ -163,7 +163,6 @@ public class CompteEpargneDAO {
 				compte.setIdCompte(rs.getInt("IdCompte"));
 				compte.setNumeroCompte(rs.getInt("numeroCompte"));
 				compte.setTauxInteret(rs.getDouble("tauxInteret"));
-				compte.setDateOuverture(rs.getString("dateOuverture"));
 				compte.setSolde(rs.getDouble("solde"));
 				listCEpargne.add(compte);
 			}
