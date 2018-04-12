@@ -18,6 +18,10 @@ public class Conseiller {
 		super();
 	}
 
+	public Conseiller(int idConseiller) {
+		super();
+		this.idConseiller = idConseiller;
+	}
 	public Conseiller(String nom, String prenom) {
 		super();
 		this.nom = nom;
