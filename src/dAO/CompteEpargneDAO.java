@@ -95,7 +95,7 @@ public class CompteEpargneDAO {
 
 			Statement stmt = Connexion.connexion().createStatement(); // Création d'un objet de type Statement
 			// Affectation à la chaine de caractère s de la requète SQL
-			String s = "UPDATE compte set numeroCompte = '" + compte.getNumeroCompte() + "', tauxInteret = '"
+			String s = "UPDATE compte set numeroCompte = '" + compte.getNumeroCompte() + "', tauxInteret = "
 					+ compte.getTauxInteret() + ", solde = " + compte.getSolde() + " where idcompte = "
 					+ compte.getIdCompte();
 			stmt.executeUpdate(s);

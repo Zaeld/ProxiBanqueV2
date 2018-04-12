@@ -18,6 +18,8 @@ public class GestionClientService {
 
 	// Déclaration
 	ClientDAO dao = new ClientDAO();
+	Courant compteCourant = new Courant();
+	Epargne compteEpargne = new Epargne();
 
 	// La méthode verifClientFortune prend un objet de type Client en paramètre
 	// d'entrée et modifie son attribut situationFinanciere sous conditions
@@ -55,8 +57,6 @@ public class GestionClientService {
 
 		// Déclaration
 		double soldeTotal = 0;
-		Courant compteCourant = new Courant();
-		Epargne compteEpargne = new Epargne();
 
 		// On récupère dans la base de donnée les comptes associés au client
 

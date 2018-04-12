@@ -23,9 +23,15 @@ public class Client {
 	// Constructeur par défaut et paramétré
 
 	public Client() {
+		this.idClient=1;
 		this.situationProfessionnel = "particulier";
 		this.situationFinanciere = "normal";
 		this.soldeTotal = 0;
+	}
+
+	public Client(int idClient) {
+		super();
+		this.idClient = idClient;
 	}
 
 	public Client(String nom, String prenom, String adresse, String codePostal, String ville, String email,

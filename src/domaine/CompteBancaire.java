@@ -19,6 +19,8 @@ public abstract class CompteBancaire {
 	// Constructeur par défaut
 	public CompteBancaire() {
 		this.numCompte = (int) (Math.random() * 10000);
+		this.solde = 12;
+		this.idCompte=1;
 	}
 
 	public int getNumCompte() {

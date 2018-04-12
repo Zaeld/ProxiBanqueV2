@@ -6,7 +6,7 @@ import domaine.Conseiller;
 public class ConseillerService {
 	ConseillerDAO dao = new ConseillerDAO();
 
-	public Conseiller createClient(Conseiller conseiller) {
+	public Conseiller getConseiller(Conseiller conseiller) {
 		return dao.getConseiller(conseiller);
 	}
 }

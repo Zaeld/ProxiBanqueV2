@@ -187,15 +187,15 @@ public class GestionCompteService {
 	 * @param CEpargneDAO
 	 * @return
 	 */
-	public List<CompteBancaire> getAllCompte(CompteCourantDAO CCourantDAO, CompteEpargneDAO CEpargneDAO) {
+	public List<CompteBancaire> getAllCompte() {
 
 		// Déclaration
 		List<CompteBancaire> listCompte = new ArrayList<CompteBancaire>();
 
 		// On ajoute la liste des comptes épargnes et courant à la liste de compte
 		// bancaire
-		listCompte.addAll(CCourantDAO.getAllCourant());
-		listCompte.addAll(CEpargneDAO.getAllEpargne());
+		listCompte.addAll(courantDAO.getAllCourant());
+		listCompte.addAll(epargneDAO.getAllEpargne());
 		return listCompte;
 	}
 

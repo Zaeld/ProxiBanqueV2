@@ -117,7 +117,7 @@ public class ClientDAO {
 					+ "', situationFinanciere = '" + client.getSituationFinanciere() + "', situationProfessionnel = '"
 					+ client.getSituationProfessionnel() + "', idConseiller = " + client.getidConseiller()
 					+ ", telephone = '" + client.getTelephone() + "', soldeTotal = " + client.getSoldeTotal()
-					+ ", where idClient = " + client.getIdClient();
+					+ " where idClient = " + client.getIdClient();
 			// exécution de la requète
 			stmt.executeUpdate(s);
 
