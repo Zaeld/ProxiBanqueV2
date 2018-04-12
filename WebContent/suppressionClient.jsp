@@ -48,17 +48,17 @@
 		<div class="jumbotron">
 			<h2 target="danger">
 				Etes-vous sûr de vouloir supprimer
-				<c:out value="${client.nom}" />
-				<c:out value="${client.prenom}" />
+				<c:out value="${client.getNom()}" />
+				<c:out value="${client.getPrenom()}" />
 				?
 			</h2>
 		</div>
 
 		<div class="text-center">
 			<a class="btn btn-success"
-				href="ServletSupprimerClient?idClient=${client.getIdClient()}&reponse=oui"
+				href="ServletSupprimerClient?idClient=${client.getIdClient()}"
 				role="button">OUI Supprimer</a> <a class="btn btn-danger"
-				href="ServletSupprimerClient?idClient=${client.getIdClient()}&reponse=non"
+				href="ServletRetourAcceuil?idConseiller=${conseiller.getIdConseiller()}"
 				role="button">NON Revenir à l'acceuil</a>
 		</div>
 

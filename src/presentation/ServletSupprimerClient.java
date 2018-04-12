@@ -35,15 +35,8 @@ public class ServletSupprimerClient extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//récupération de la réponse et transformation en boolean
-		String texte = request.getParameter("reponse");
-		boolean reponse = false;
-		if (texte.equals("oui")) {
-			reponse = true;
-		}
-		
 		RequestDispatcher dispatcher;
-		if (reponse == true) {//si réponse oui on supprime le client
+
 			String a = request.getParameter("idClient");
 			int idClient = Integer.parseInt(a);
 			Client monClient = new Client();
@@ -57,10 +50,6 @@ public class ServletSupprimerClient extends HttpServlet {
 				dispatcher = request.getRequestDispatcher("suppressionClientErreur.jsp");
 				dispatcher.forward(request, response);
 			}
-		} else {//si la réponse est non on renvoie vers l'acceuil
-			dispatcher = request.getRequestDispatcher("acceuilV2.jsp");
-			dispatcher.forward(request, response);
-		}
 	}
 
 	/**

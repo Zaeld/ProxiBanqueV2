@@ -36,7 +36,8 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li><a href="acceuilV2.jsp">Retour</a></li>
+				<li><a
+					href="ServletRetourAcceuil?idConseiller=${conseiller.getIdConseiller()}">Retour</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a class="btn btn-danger btn-lg" href="index.html"
@@ -68,13 +69,12 @@
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-4">
-							<label for="inputCivil">Situation Professionnelle</label> <select
-								id="inputStiProf" class="form-control"
-								name="situationProfessionelle"
-								value="${client.getSituationProfessionnel()}">
-								<option selected>particulier</option>
-								<option>entreprise</option>
-							</select>
+							<input class="form-check-input" name="situationProfessionelle"
+								type="radio" id="particulier" value="${client.getSituationProfessionnel}"> <label
+								class="form-check-label" for="particulier" target="check">Particulier</label>
+							<input class="form-check-input" name="situationProfessionelle"
+								type="radio" id="entreprise" value="${client.getSituationProfessionnel}"> <label
+								class="form-check-label" for="entreprise">Entreprise</label>
 						</div>
 						<div class="form-group col-md-4">
 							<label for="inputMail">Email</label> <input type="email"
@@ -83,7 +83,7 @@
 						</div>
 						<div class="form-group col-md-4">
 							<label for="inputPhone">Numéro de téléphone</label> <input
-								type="number" class="form-control" id="inputPhone"
+								type="tel" class="form-control" id="inputPhone"
 								value="${client.getTelephone()}" name="numeroTelephone">
 						</div>
 					</div>
@@ -95,15 +95,20 @@
 						</div>
 					</div>
 					<div class="form-row">
-						<div class="form-group col-md-4">
+						<div class="form-group col-md-3">
 							<label for="inputCp">Code Postale</label> <input type="number"
 								class="form-control" id="inputCp"
 								value="${client.getCodePostal()}" name="codePostal">
 						</div>
-						<div class="form-group col-md-8">
+						<div class="form-group col-md-7">
 							<label for="inputVille">Ville</label> <input type="text"
 								class="form-control" id="inputVille"
 								value="${client.getVille()}" name="ville">
+						</div>
+						<div class="form-group col-md-2">
+							<label for="inputIdConseiller">Id du Conseiller</label> <input
+								type="number" readonly class="form-control" id="inputVille"
+								value="${conseiller.getIdConseiller()}" name="idConseiller">
 						</div>
 					</div>
 					<div class="form-row text-center">

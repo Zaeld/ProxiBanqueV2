@@ -48,8 +48,7 @@ public class ServletLogin extends HttpServlet {
 		LoginService service = new LoginService();
 		
 		//TODO retirer infos en dur
-		//Conseiller conseiller = service.VerifLogin(user);
-		Conseiller conseiller = new Conseiller("Blabla", "Bliblou");
+		Conseiller conseiller = service.VerifLogin(user);
 				
 		RequestDispatcher dispatcher;
 		
@@ -60,9 +59,7 @@ public class ServletLogin extends HttpServlet {
 			//Creation de la liste de client gere a renvoyer
 			ClientService monService = new ClientService();
 			List<Client> listeClient = new ArrayList<Client>();
-			//TODO remettre juste les clients du conseiller
-			//listeClient = monService.getAllClientConseiller(conseiller);
-			listeClient = monService.getAllClient();
+			listeClient = monService.getAllClientConseiller(conseiller);
 			maSession.setAttribute("listeClient", listeClient);
 			
 			dispatcher = request.getRequestDispatcher("acceuilV2.jsp");
