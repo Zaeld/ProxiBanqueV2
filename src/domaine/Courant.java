@@ -15,6 +15,7 @@ public class Courant extends CompteBancaire {
 	public Courant() {
 		super();
 		this.decouvertAutorise = 1000;
+		this.setTypeDeCompte("courant");
 	}
 
 	// Getters et Setters

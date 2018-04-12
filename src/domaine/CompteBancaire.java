@@ -14,10 +14,27 @@ public abstract class CompteBancaire {
 	private int numCompte;
 	private double solde;
 	private int idClient;
+	private String typeDeCompte;
 
 	// Constructeur par défaut
 	public CompteBancaire() {
 		this.numCompte = (int) (Math.random() * 10000);
+	}
+
+	public int getNumCompte() {
+		return numCompte;
+	}
+
+	public void setNumCompte(int numCompte) {
+		this.numCompte = numCompte;
+	}
+
+	public String getTypeDeCompte() {
+		return typeDeCompte;
+	}
+
+	public void setTypeDeCompte(String typeDeCompte) {
+		this.typeDeCompte = typeDeCompte;
 	}
 
 	// Getters et Setters

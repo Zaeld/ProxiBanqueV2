@@ -35,9 +35,9 @@ public class CompteEpargneDAO {
 		boolean b = false;
 		try {
 			// Affectation à la chaine de caractère s de la requète SQL
-			String s = "INSERT INTO `compte`(`numeroCompte`, `tauxInteret`, `dateOuverture`, `solde`, `idClient`)"
+			String s = "INSERT INTO `compte`(`numeroCompte`, `tauxInteret`, `dateOuverture`, `solde`, `idClient`, `typeDeCompte`)"
 					+ " VALUES ( " + compte.getNumeroCompte() + ", " + compte.getTauxInteret() + ", "
-					+ compte.getSolde() + ", " + compte.getIdClient() + ")";
+					+ compte.getSolde() + ", " + compte.getIdClient() + ", '"+compte.getTypeDeCompte()+")";
 			// Création d'un objet de type Statement
 			Statement stmt = Connexion.connexion().prepareStatement(s);
 			// exécution de la requete

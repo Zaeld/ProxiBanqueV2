@@ -15,6 +15,7 @@ public class Epargne extends CompteBancaire {
 	public Epargne() {
 		super();
 		this.tauxInteret = 3.00;
+		this.setTypeDeCompte("épargne");
 	}
 
 	// Getters et Setters
