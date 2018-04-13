@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"org.ProxiBanque.service"}]

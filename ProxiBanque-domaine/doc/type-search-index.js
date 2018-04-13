@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"org.ProxiBanque.domaine","l":"AppTest"},{"p":"org.ProxiBanque.domaine","l":"Client"},{"p":"org.ProxiBanque.domaine","l":"CompteBancaire"},{"p":"org.ProxiBanque.domaine","l":"Conseiller"},{"p":"org.ProxiBanque.domaine","l":"Courant"},{"p":"org.ProxiBanque.domaine","l":"Epargne"},{"p":"org.ProxiBanque.domaine","l":"Login"}]
