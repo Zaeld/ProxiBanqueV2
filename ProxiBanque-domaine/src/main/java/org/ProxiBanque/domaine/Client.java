@@ -35,7 +35,7 @@ public class Client {
 	}
 	// Constructeur pour la modification du client
 	public Client(int idClient, String nom, String prenom, String adresse, String codePostal, String ville, String email,
-			String telephone, String situationProfessionnel, int idConseiller) {
+			String telephone, String situationProfessionnel, double soldeTotal, int idConseiller) {
 		super();
 		this.idClient=idClient;
 		this.nom = nom;
@@ -46,6 +46,7 @@ public class Client {
 		this.email = email;
 		this.telephone = telephone;
 		this.situationProfessionnel = situationProfessionnel;
+		this.soldeTotal = soldeTotal;
 		this.idConseiller = idConseiller;
 
 	}

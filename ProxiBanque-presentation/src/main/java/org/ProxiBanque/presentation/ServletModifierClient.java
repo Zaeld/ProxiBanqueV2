@@ -53,6 +53,7 @@ public class ServletModifierClient extends HttpServlet {
 		// récupération de l'idClient de la session et de son solde total
 		Client client = (Client) maSession.getAttribute("client");
 		int idClient = client.getIdClient();
+		double soldeTotal = client.getSoldeTotal();
 
 		// recuperation des donnees
 		String nom = request.getParameter("nom");
@@ -65,7 +66,7 @@ public class ServletModifierClient extends HttpServlet {
 		String ville = request.getParameter("ville");
 
 		// creation d'un client avec les infos recuperees
-		Client monClient = new Client(idClient, nom, prenom, adresse, cp, ville, email, numtel, sitprof, idConseiller);
+		Client monClient = new Client(idClient, nom, prenom, adresse, cp, ville, email, numtel, sitprof, soldeTotal, idConseiller);
 
 		// les parametre de la requete sont soumis a la couche service et recuperation
 		// de la reponse

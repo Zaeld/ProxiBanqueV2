@@ -78,7 +78,7 @@
 									<td><h4>Téléphone</h4></td>
 									<td><h4>Adresse</h4></td>
 									<td><h4>Situation Professionnelle</h4></td>
-									<td><h4>Situation Financière</h4></td>
+									<!-- <td><h4>Situation Financière</h4></td> -->
 								</tr>
 							</thead>
 							<tbody>
@@ -90,7 +90,7 @@
 										<td><c:out value="${client.getTelephone()}" /></td>
 										<td><c:out value="${client.getAdresse()} ${client.getCodePostal()} ${client.getVille()}" /></td>
 										<td><c:out value="${client.getSituationProfessionnel()}" /></td>
-										<td><c:out value="${client.getSituationFinanciere()}" /></td>
+										<!-- <td><c:out value="${client.getSituationFinanciere()}" /></td> -->
 										<td><a class="btn btn-info"
 											href="ServletAcceuilRedirection?idClient=${client.getIdClient()}&direction=listeCompte"
 											role="button">Listes des comptes du client</a> <a
