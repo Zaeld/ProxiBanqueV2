@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import domaine.Client;
 import service.ClientService;
@@ -34,22 +35,21 @@ public class ServletSupprimerClient extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		RequestDispatcher dispatcher;
 
-			String a = request.getParameter("idClient");
-			int idClient = Integer.parseInt(a);
-			Client monClient = new Client();
-			monClient.setIdClient(idClient);
-			ClientService service = new ClientService();
-			boolean retour = service.deleteClient(monClient);
-			if (retour == true) {//Si le client est supprimé correctement on renvoie sur lapage de réussite
-				dispatcher = request.getRequestDispatcher("operationReussie.jsp");
-				dispatcher.forward(request, response);
-			} else {//Sinon on renvoie vers une page d'erreur
-				dispatcher = request.getRequestDispatcher("suppressionClientErreur.jsp");
-				dispatcher.forward(request, response);
-			}
+		// récupération de l'idClient de la session
+		HttpSession maSession = request.getSession(true);
+		Client client = (Client) maSession.getAttribute("client");
+		ClientService service = new ClientService();
+		boolean retour = service.deleteClient(client);
+		if (retour == true) {// Si le client est supprimé correctement on renvoie sur lapage de réussite
+			dispatcher = request.getRequestDispatcher("operationReussie.jsp");
+			dispatcher.forward(request, response);
+		} else {// Sinon on renvoie vers une page d'erreur
+			dispatcher = request.getRequestDispatcher("suppressionClientErreur.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	/**

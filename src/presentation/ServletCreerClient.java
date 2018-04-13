@@ -11,8 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import domaine.Client;
+import domaine.Conseiller;
 import service.ClientService;
 
 /**
@@ -36,23 +38,26 @@ public class ServletCreerClient extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// récupération de l'Id du conseiller de la session
+		HttpSession maSession = request.getSession(true);
+		Conseiller conseiller = (Conseiller) maSession.getAttribute("conseiller");
+		int idConseiller = conseiller.getIdConseiller();
+
 		// recuperation des donnees
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
-		String sitprof = request.getParameter("situationProfessionelle");
+		String sitprof = request.getParameter("situationProfessionel");
 		String numtel = request.getParameter("numeroTelephone");
 		String email = request.getParameter("email");
 		String adresse = request.getParameter("adresse");
 		String cp = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
-		String id = request.getParameter("idConseiller");
-		int idConseiller = Integer.parseInt(id);
 
-		
-		//creation d'un client avec les infos recuperees
+		// creation d'un client avec les infos recuperees
 		Client monClient = new Client(nom, prenom, adresse, cp, ville, email, numtel, sitprof, idConseiller);
 
-		// les parametres de la requete sont soumis a la couche service et recuperation de la réponse
+		// les parametres de la requete sont soumis a la couche service et recuperation
+		// de la réponse
 		ClientService service = new ClientService();
 		boolean reponse = service.createClient(monClient);
 

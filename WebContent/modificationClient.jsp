@@ -36,7 +36,8 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li><a href="acceuilV2.jsp">Retour</a></li>
+				<li><a
+					href="ServletRetourAcceuil">Retour</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a class="btn btn-danger btn-lg" href="index.html"
@@ -58,52 +59,51 @@
 						<div class="form-group col-md-6">
 							<label for="inputName">Nom</label> <input type="text"
 								class="form-control" id="inputNom" value="${client.getNom()}"
-								name="nom">
+								name="nom" required>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="inputPrenom">Prénom</label> <input type="text"
 								class="form-control" id="inputPrenom"
-								value="${client.getPrenom()}" name="prenom">
+								value="${client.getPrenom()}" name="prenom" required>
 						</div>
 					</div>
 					<div class="form-row">
-						<div class="form-group col-md-4">
-							<label for="inputCivil">Situation Professionnelle</label> <select
-								id="inputStiProf" class="form-control"
-								name="situationProfessionelle"
-								value="${client.getSituationProfessionnel()}">
-								<option selected>particulier</option>
-								<option>entreprise</option>
-							</select>
+						<div class="form-group col-md-3">
+									<label for="situationProfessionnel">Situation
+										Professionnelle : </label> <select id="situationProfessionnel"
+										class="form-control" name="situationProfessionnel" value="${client.getSituationProfessionnel()}" required>
+										<option value="particulier">Particulier</option>
+										<option value="entreprise">Entreprise</option>
+									</select>
 						</div>
-						<div class="form-group col-md-4">
+						<div class="form-group col-md-5">
 							<label for="inputMail">Email</label> <input type="email"
 								class="form-control" id="inputMail" value="${client.getEmail()}"
-								name="email">
+								name="email" required>
 						</div>
 						<div class="form-group col-md-4">
 							<label for="inputPhone">Numéro de téléphone</label> <input
-								type="number" class="form-control" id="inputPhone"
-								value="${client.getTelephone()}" name="numeroTelephone">
+								type="tel" class="form-control" id="inputPhone"
+								value="${client.getTelephone()}" name="numeroTelephone" required>
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-12">
 							<label for="inputAddresse">Addresse</label> <input type="text"
 								class="form-control" id="inputAddresse"
-								value="${client.getAdresse()}" name="adresse1">
+								value="${client.getAdresse()}" name="adresse" required>
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-4">
 							<label for="inputCp">Code Postale</label> <input type="number"
 								class="form-control" id="inputCp"
-								value="${client.getCodePostal()}" name="codePostal">
+								value="${client.getCodePostal()}" name="codePostal" required>
 						</div>
 						<div class="form-group col-md-8">
 							<label for="inputVille">Ville</label> <input type="text"
 								class="form-control" id="inputVille"
-								value="${client.getVille()}" name="ville">
+								value="${client.getVille()}" name="ville" required>
 						</div>
 					</div>
 					<div class="form-row text-center">

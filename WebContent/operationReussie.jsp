@@ -48,11 +48,12 @@
 		<div class="row content">
 			<div class="col-sm-1 sidenav"></div>
 			<div class="col-sm-10 text-left">
-				<div class="jumbotron">
-					<h2 target="danger">L'opération a été réalisée sans rencontrer de problème.</h2>
+				<div class="jumbotron text-center">
+					<h2 target="reussie">L'opération a été réalisée sans rencontrer de problème.</h2>
+					<br>
 					<div class="text-center">
 						<a class="btn btn-default btn-lg"
-							href="acceuilV2.jsp"
+							href="ServletRetourAcceuil"
 							role="button">Retour</a>
 					</div>
 				</div>

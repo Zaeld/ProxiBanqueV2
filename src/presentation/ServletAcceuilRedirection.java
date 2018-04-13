@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import domaine.Client;
 import domaine.CompteBancaire;
@@ -42,32 +43,32 @@ public class ServletAcceuilRedirection extends HttpServlet {
 		int idClient = Integer.parseInt(idClientS); 
 		Client monClient = new Client();
 		monClient.setIdClient(idClient);
-		ClientService service = new ClientService();
-		monClient = service.getClient(monClient);
-		request.setAttribute("client", monClient);
+		ClientService serviceClient = new ClientService();
+		monClient = serviceClient.getClient(monClient);
+		
+		//récupération du conseiller de la session
+		HttpSession maSession = request.getSession(true);
+		
+		//Récupération des comptes courant et epargne du client
+		Courant courant = serviceClient.getCompteCourant(monClient);
+		Epargne epargne = serviceClient.getCompteEpargne(monClient);
+		
+		//Récupération de tous les comptes et des clients associés
+		GestionCompteService serviceCompte = new GestionCompteService();
+		List<CompteBancaire> listeCompte = serviceCompte.getAllCompte();
+		
+		//set des attributs dans la session
+		maSession.setAttribute("courant", courant);
+		maSession.setAttribute("epargne", epargne);
+		maSession.setAttribute("listeCompte", listeCompte);
+		maSession.setAttribute("client", monClient);
 		
 		//redirection selon le boutton cliqué
 		RequestDispatcher dispatcher;
 		String direction = (String) request.getParameter("direction");
 		if (direction.equals("listeCompte")) {
-			//Récupération des comptes courant et epargne du client
-			Courant courant = service.getCompteCourant(monClient);
-			Epargne epargne = service.getCompteEpargne(monClient);
-			request.setAttribute("courant", courant);
-			request.setAttribute("epargne", epargne);
 			dispatcher = request.getRequestDispatcher("client.jsp");
-		}else if (direction.equals("virement")) {
-			//Récupération des comptes courant et epargne du client
-			Courant courant = service.getCompteCourant(monClient);
-			Epargne epargne = service.getCompteEpargne(monClient);
-			
-			//Récupération de tous les comptes et des clients associés
-			GestionCompteService serviceCompte = new GestionCompteService();
-			List<CompteBancaire> listeCompte = serviceCompte.getAllCompte();
-			
-			request.setAttribute("courant", courant);
-			request.setAttribute("epargne", epargne);
-			request.setAttribute("listeCompte", listeCompte);
+		}else if (direction.equals("virement")) {			
 			dispatcher = request.getRequestDispatcher("virement.jsp");
 		}else if (direction.equals("modifier")) {
 			dispatcher = request.getRequestDispatcher("modificationClient.jsp");

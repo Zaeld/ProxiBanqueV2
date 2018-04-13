@@ -39,7 +39,8 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li><a href="acceuilV2.jsp">Acceuil</a></li>
+				<li><a
+					href="ServletRetourAcceuil">Acceuil</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a class="btn btn-danger btn-lg" href="index.html"
@@ -53,112 +54,60 @@
 		<div class="row content">
 			<div class="col-sm-1 sidenav"></div>
 			<div class="col-sm-10 text-left">
-				<form class="text-center" target="ligneDeCommande">
-					<input type="submit" value="Gestion du patrimoine"
-						class="btn btn-primary"> <input type="submit"
-						value="Simulation de crédit immobilier" class="btn btn-primary">
-					<input type="submit" value="Simulation de crédit consommation"
-						class="btn btn-primary">
-				</form>
-				<h2>Informations sur le client :</h2>
-				<div class="col-sm-1"></div>
-				<div class="col-sm-10 text-left">
-					<div class="row">
-						<div class="col-sm-6">
-							<p>
-								Nom :
-								<c:out value="${client.getNom()}" />
-							</p>
-							<p>
-								Prénom :
-								<c:out value="${client.getPrenom()}" />
-							</p>
-							<p>
-								Situation Professionnelle :
-								<c:out value="${client.getSituationProfessionnel()}" />
-							</p>
-							<p>
-								Numéro de téléphone :
-								<c:out value="${client.getTelephone()}" />
-							</p>
-						</div>
-						<div class="col-sm-6">
-							<p>Adresse :</p>
-							<p class="retrait">
-								<c:out value="${client.getAdresse()}" />
-							</p>
-							<p class="retrait">
-								<c:out value="${client.getCodePostal()}" />
-							</p>
-							<p class="retrait">
-								<c:out value="${client.getVille()}" />
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-1"></div>
-				<hr>
+				<h2>Liste des comptes de ${client.getNom()}
+					${client.getPrenom()} :</h2>
 				<div class="col-sm-6 text-left">
 					<h3>Compte courant</h3>
-					<div class="row">
-						<div class="col-sm-6">
-							<p>
-								Numéro de comtpe :
-								<c:out value="${courant.getNumCompte}" />
-							</p>
-							<p>
-								Solde :
-								<c:out value="${courant.getSolde}" />
-							</p>
-						</div>
-						<div class="col-sm-6 text-center">
-							<form method="POST" action="ServletCredit">
-								<input type="submit" value="Effectuer un Crédit"
-									class="btn btn-success" target="actions">
-							</form>
-							<form method="POST" action="ServletDebit">
-								<input type="submit" value="Effectuer un Débit"
-									class="btn btn-danger" target="actions">
-							</form>
-							<form method="POST" action="ServletVirement">
-								<input type="submit" value="Effectuer un Virement"
-									class="btn btn-secondary" target="actions">
-							</form>
-						</div>
-					</div>
+					<c:choose>
+						<c:when test="${courant != null}">
+							<div class="row">
+								<p>
+									Numéro de comtpe :
+									<c:out value="${courant.getNumCompte()}" />
+								</p>
+								<p>
+									Solde :
+									<c:out value="${courant.getSolde()}" />
+								</p>
+								<p>
+									Type de carte :
+									<c:out value="${courant.getTypeCarte()}" />
+								</p>
+								<p>
+									Decouvert Autorise :
+									<c:out value="${courant.getDecouvertAutorise()}" />
+								</p>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<p>Ce client n'a pas de compte courant</p>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="col-sm-6 text-left">
 					<h3>Compte Epargne</h3>
-					<div class="row">
-						<div class="col-sm-6">
-							<p>
-								Numéro de comtpe :
-								<c:out value="${epargne.getNumCompte}" />
-							</p>
-							<p>
-								Solde :
-								<c:out value="${epargne.getSolde}" />
-							</p>
-						</div>
-						<div class="col-sm-6 text-center">
-							<form method="POST" action="ServletCredit">
-								<input type="submit" value="Effectuer un Crédit"
-									class="btn btn-success" target="actions">
-							</form>
-							<form method="POST" action="ServletDebit">
-								<input type="submit" value="Effectuer un Débit"
-									class="btn btn-danger" target="actions">
-							</form>
-							<form method="POST" action="ServletVirement">
-								<input type="submit" value="Effectuer un Virement"
-									class="btn btn-secondary" target="actions">
-							</form>
-							<form method="POST" action="ServletRemuneration">
-								<input type="submit" value="Afficher la rémunération de cette année"
-									class="btn btn-info" target="actions">
-							</form>
-						</div>
-					</div>
+					<c:choose>
+						<c:when test="${epargne != null}">
+							<div class="row">
+								<p>
+									Numéro de comtpe :
+									<c:out value="${epargne.getNumCompte()}" />
+								</p>
+								<p>
+									Solde :
+									<c:out value="${epargne.getSolde()}" />
+								</p>
+																<p>
+									Taux d'intéret :
+									<c:out value="${epargne.getTauxInteret()}" />
+								</p>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<p>Ce client n'a pas de compte epargne</p>
+						</c:otherwise>
+					</c:choose>
+
 				</div>
 			</div>
 			<div class="col-sm-1 sidenav"></div>

@@ -57,8 +57,8 @@
 			<div class="col-sm-10 text-left">
 				<h4 class="text-center">
 					Bienvenue dans votre espace ProxiBanqueSI
-					<c:out value="${conseiller.nom}" />
-					<c:out value="${conseiller.prenom}" />
+					<c:out value="${conseiller.getNom()}" />
+					<c:out value="${conseiller.getPrenom()}" />
 				</h4>
 				<hr>
 				<h2>Liste des clients gérés :</h2>
@@ -71,16 +71,18 @@
 							<td><h4>e-mail</h4></td>
 							<td><h4>Téléphone</h4></td>
 							<td><h4>Adresse</h4></td>
+							<td><h4>Situation Professionnelle</h4></td>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${listeClient}" var="client">
 							<tr>
-								<td><c:out value="${client.nom}" /></td>
-								<td><c:out value="${client.prenom}" /></td>
-								<td><c:out value="${client.email}" /></td>
-								<td><c:out value="${client.telephone}" /></td>
-								<td><c:out value="${client.adresse}+${client.codePostal}+${client.ville}" /></td>
+								<td><c:out value="${client.getNom()}" /></td>
+								<td><c:out value="${client.getPrenom()}" /></td>
+								<td><c:out value="${client.getEmail()}" /></td>
+								<td><c:out value="${client.getTelephone()}" /></td>
+								<td><c:out value="${client.getAdresse()} ${client.getCodePostal()} ${client.getVille()}" /></td>
+								<td><c:out value="${client.getSituationProfessionnel()}" /></td>
 								<td><a class="btn btn-info"
 									href="ServletAcceuilRedirection?idClient=${client.getIdClient()}&direction=listeCompte"
 									role="button">Listes des comptes du client</a>
@@ -89,9 +91,9 @@
 									role="button">Virement Compte à Compte</a>
 									 <a class="btn btn-warning"
 									href="ServletAcceuilRedirection?idClient=${client.getIdClient()}&direction=modifier"
-									role="button">Modifier les informations client</a> <a class="btn btn-danger"
+									role="button">Modifier les informations du client</a> <a class="btn btn-danger"
 									href="ServletAcceuilRedirection?idClient=${client.getIdClient()}&direction=supprimer"
-									role="button">Supprimer</a></td>
+									role="button">Supprimer le client</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

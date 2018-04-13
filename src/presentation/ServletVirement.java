@@ -1,8 +1,6 @@
 package presentation;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,24 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import domaine.Client;
-import domaine.Conseiller;
-import service.ClientService;
-import service.ConseillerService;
 
 /**
- * Servlet implementation class ServletRetourAcceuil
+ * Servlet implementation class ServletVirement
  */
-@WebServlet("/ServletRetourAcceuil")
-public class ServletRetourAcceuil extends HttpServlet {
+@WebServlet("/ServletVirement")
+public class ServletVirement extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletRetourAcceuil() {
+    public ServletVirement() {
         super();
     }
 
@@ -35,19 +27,25 @@ public class ServletRetourAcceuil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String compteDebit = request.getParameter("compteDebit");
+		String compteCredit = request.getParameter("compteCredit");
+		String sommeVirement = request.getParameter("sommeVirement");
+		System.out.println(compteDebit);
+		System.out.println(compteCredit);
+		System.out.println(sommeVirement);
 		
-		//récupération du conseiller de la session
-		HttpSession maSession = request.getSession(true);
-		Conseiller conseiller = (Conseiller) maSession.getAttribute("conseiller");
 		
-		//Creation de la liste de client gere a renvoyer
-		ClientService monService = new ClientService();
-		List<Client> listeClient = new ArrayList<Client>();
-		listeClient = monService.getAllClientConseiller(conseiller);
-		maSession.setAttribute("listeClient", listeClient);
 		RequestDispatcher dispatcher;
-		dispatcher = request.getRequestDispatcher("acceuilV2.jsp");
-		dispatcher.forward(request, response);
+		
+		boolean retour = true;
+		if (retour == true) {//Si le client est supprimé correctement on renvoie sur lapage de réussite
+			dispatcher = request.getRequestDispatcher("operationReussie.jsp");
+			dispatcher.forward(request, response);
+		} else {//Sinon on renvoie vers une page d'erreur
+			dispatcher = request.getRequestDispatcher("suppressionClientErreur.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	/**
